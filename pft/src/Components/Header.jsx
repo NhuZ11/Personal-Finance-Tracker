@@ -50,7 +50,7 @@ const Header = () => {
               <li className="max-lg:border-b border-gray-300 max-lg:py-3 px-3">
                 <a
                   href="javascript:void(0)"
-                  className="hover:text-[#007bff] text-[#007bff] block font-semibold text-[15px]"
+                  className="hover:text-[#2eb82e] text-[#2eb82e] block font-semibold text-[15px]"
                 >
                   Home
                 </a>
@@ -58,7 +58,7 @@ const Header = () => {
               <li className="max-lg:border-b border-gray-300 max-lg:py-3 px-3">
                 <a
                   href="javascript:void(0)"
-                  className="hover:text-[#007bff] text-gray-500 block font-semibold text-[15px]"
+                  className="hover:text-[#2eb82e] text-gray-500 block font-semibold text-[15px]"
                 >
                   Team
                 </a>
@@ -66,7 +66,7 @@ const Header = () => {
               <li className="max-lg:border-b border-gray-300 max-lg:py-3 px-3">
                 <a
                   href="javascript:void(0)"
-                  className="hover:text-[#007bff] text-gray-500 block font-semibold text-[15px]"
+                  className="hover:text-[#2eb82e] text-gray-500 block font-semibold text-[15px]"
                 >
                   Feature
                 </a>
@@ -74,7 +74,7 @@ const Header = () => {
               <li className="max-lg:border-b border-gray-300 max-lg:py-3 px-3">
                 <a
                   href="javascript:void(0)"
-                  className="hover:text-[#007bff] text-gray-500 block font-semibold text-[15px]"
+                  className="hover:text-[#2eb82e] text-gray-500 block font-semibold text-[15px]"
                 >
                   Blog
                 </a>
@@ -82,7 +82,7 @@ const Header = () => {
               <li className="max-lg:border-b border-gray-300 max-lg:py-3 px-3">
                 <a
                   href="javascript:void(0)"
-                  className="hover:text-[#007bff] text-gray-500 block font-semibold text-[15px]"
+                  className="hover:text-[#2eb82e] text-gray-500 block font-semibold text-[15px]"
                 >
                   About
                 </a>
@@ -90,7 +90,7 @@ const Header = () => {
               <li className="max-lg:border-b border-gray-300 max-lg:py-3 px-3">
                 <a
                   href="javascript:void(0)"
-                  className="hover:text-[#007bff] text-gray-500 block font-semibold text-[15px]"
+                  className="hover:text-[#2eb82e] text-gray-500 block font-semibold text-[15px]"
                 >
                   Contact
                 </a>
@@ -99,10 +99,10 @@ const Header = () => {
           </div>
 
           <div className="flex max-lg:ml-auto space-x-3">
-            <button className="px-4 py-2 text-sm rounded-full font-bold text-white border-2 border-[#007bff] bg-[#007bff] transition-all ease-in-out duration-300 hover:bg-transparent hover:text-[#007bff]">
+            <button className="px-4 py-2 text-sm rounded-full font-bold text-white border-2 border-[#2eb82e] bg-[#2eb82e] transition-all ease-in-out duration-300 hover:bg-transparent hover:text-[#2eb82e]">
               Login
             </button>
-            <button className="px-4 py-2 text-sm rounded-full font-bold text-white border-2 border-[#007bff] bg-[#007bff] transition-all ease-in-out duration-300 hover:bg-transparent hover:text-[#007bff]">
+            <button className="px-4 py-2 text-sm rounded-full font-bold text-white border-2 border-[#2eb82e] bg-[#2eb82e] transition-all ease-in-out duration-300 hover:bg-transparent hover:text-[#2eb82e]">
               Sign up
             </button>
 
