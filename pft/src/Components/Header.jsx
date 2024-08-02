@@ -1,4 +1,5 @@
 import React from "react";
+import Logo from '../assets/logo4.png'
 
 const Header = () => {
   return (
@@ -7,9 +8,9 @@ const Header = () => {
         <div className="flex flex-wrap items-center justify-between gap-5 w-full">
           <a href="javascript:void(0)">
             <img
-              src="https://readymadeui.com/readymadeui.svg"
+              src={Logo}
               alt="logo"
-              className="w-36"
+              className="w-[250px] h-[100xp] rounded-3xl hover:translate"
             />
           </a>
 
