@@ -59,7 +59,7 @@ const Header = () => {
               <li className="max-lg:border-b border-gray-300 max-lg:py-3 px-3">
                 <a
                   href="javascript:void(0)"
-                  className="hover:text-[#2eb82e] text-gray-500 block font-semibold text-[15px]"
+                  className="hover:text-[#2eb82e] text-black block font-semibold text-[15px]"
                 >
                   Team
                 </a>
@@ -67,7 +67,7 @@ const Header = () => {
               <li className="max-lg:border-b border-gray-300 max-lg:py-3 px-3">
                 <a
                   href="javascript:void(0)"
-                  className="hover:text-[#2eb82e] text-gray-500 block font-semibold text-[15px]"
+                  className="hover:text-[#2eb82e] text-black block font-semibold text-[15px]"
                 >
                   Feature
                 </a>
@@ -75,7 +75,7 @@ const Header = () => {
               <li className="max-lg:border-b border-gray-300 max-lg:py-3 px-3">
                 <a
                   href="javascript:void(0)"
-                  className="hover:text-[#2eb82e] text-gray-500 block font-semibold text-[15px]"
+                  className="hover:text-[#2eb82e] text-black block font-semibold text-[15px]"
                 >
                   Blog
                 </a>
@@ -83,7 +83,7 @@ const Header = () => {
               <li className="max-lg:border-b border-gray-300 max-lg:py-3 px-3">
                 <a
                   href="javascript:void(0)"
-                  className="hover:text-[#2eb82e] text-gray-500 block font-semibold text-[15px]"
+                  className="hover:text-[#2eb82e] text-black block font-semibold text-[15px]"
                 >
                   About
                 </a>
@@ -91,7 +91,7 @@ const Header = () => {
               <li className="max-lg:border-b border-gray-300 max-lg:py-3 px-3">
                 <a
                   href="javascript:void(0)"
-                  className="hover:text-[#2eb82e] text-gray-500 block font-semibold text-[15px]"
+                  className="hover:text-[#2eb82e] text-black block font-semibold text-[15px]"
                 >
                   Contact
                 </a>
