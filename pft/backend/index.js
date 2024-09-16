@@ -1,7 +1,8 @@
 const express = require('express');
 const app = express();
 const PORT = 3000;
-
+const dbConnect = require('./db')
+dbConnect()
 // Middleware for parsing JSON
 app.use(express.json());
 
