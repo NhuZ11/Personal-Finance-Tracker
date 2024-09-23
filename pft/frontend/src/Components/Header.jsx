@@ -98,6 +98,12 @@ const Header = () => {
             >
               Contact
             </a>
+            <Link className="bg-green-500 text-white font-bold py-1 px-4 rounded hover:bg-blue-700 transition duration-300" to="/login">
+              Login
+            </Link>
+            <Link className="bg-green-500 text-white font-bold py-1 px-4 rounded hover:bg-blue-700 transition duration-300" to="/register">
+              Register
+            </Link>
           </div>
         )}
       </nav>
