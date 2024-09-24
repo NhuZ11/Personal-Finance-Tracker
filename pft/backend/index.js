@@ -1,6 +1,7 @@
 const express = require('express');
+require('dotenv').config()
 const app = express();
-const PORT = 3000;
+const PORT = 8000
 const dbConnect = require('./db')
 dbConnect()
 // Middleware for parsing JSON

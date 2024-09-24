@@ -1,12 +1,24 @@
 const mongoose = require('mongoose')
-const Mongo_URI = "mongodb://localhost:27017/pftDatabase"
+require('dotenv').config()
+console.log(process.env.MONGODB_URI)
 
 
-const dbConnect = ()=>{
-    mongoose.connect(Mongo_URI)
-    .then(()=>{
-        console.log("Mongodb connected.")
-    })
+
+// const dbConnect = ()=>{
+//     mongoose.connect(`${process.env.MONGODB_URI}`)
+//     .then(()=>{
+//         console.log("Mongodb connected.")
+//     })
+// }
+
+
+const connectDb = async ()=>{
+    try{
+        const connectionInstance = await mongoose.connect(process.env.MONGODB_URI)
+        console.log(`MONGODB is connected: ${connectionInstance.connection.name}`)
+    } catch (error) {
+        console.log("MONGODB connection failure", error);
+    }
 }
 
-module.exports = dbConnect
+module.exports = connectDb
