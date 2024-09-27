@@ -7,6 +7,7 @@ import Header from './Components/Header';
 import Aboutus from './Components/Aboutus';
 import Login from './Components/Login';
 import Register from './Components/Register';
+import Dashboard from './Components/Dashboard';
 
 function App() {
  
@@ -26,6 +27,7 @@ function App() {
           <Route path="/about-us" element={<Aboutus />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/dashboard" element={<Dashboard />} />
         </Routes>
 
       </Router>

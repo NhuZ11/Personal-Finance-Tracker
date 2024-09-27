@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const incomeSchema = new mongoose.Schema({},{})
+const incomeSchema = new mongoose.Schema({},{timestamps: true})
 
 
 
