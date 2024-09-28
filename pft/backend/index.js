@@ -31,6 +31,8 @@ app.use(express.json());
 app.get("/", (req, res) => {
   res.send("Hello, Node.js Backend!");
 });
+// for authorization basic routes/middleware
+app.use('/pft/auth', require('./Routes/auth.js'))
 
 // Start the server
 app.listen(PORT, () => {
