@@ -1,12 +1,17 @@
 import React, { useState } from "react";
-import Logo from "../assets/logo4.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom"; // Added useNavigate
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate(); // Used for navigation
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    navigate("/login"); // Navigate to login page after logout
   };
 
   return (
@@ -16,45 +21,47 @@ const Header = () => {
           <div className="text-black text-xl font-bold">
             <a href="/">PFT</a>
           </div>
-          <div className="hidden md:flex space-x-8 py-1 items-center text-lg mr-[-90px]">
-            <Link
-              to="/home"
-              className="text-black hover:text-green-500 font-semibold"
-            >
+          <div className="hidden md:flex space-x-8 py-1 items-center text-lg">
+            <Link to="/home" className="text-black hover:text-green-500 font-semibold">
               Home
             </Link>
-            <Link
-              to="/about-us"
-              className="text-black hover:text-green-500 font-semibold"
-            >
+            <Link to="/about-us" className="text-black hover:text-green-500 font-semibold">
               About
             </Link>
-            <a
-              href="/services"
-              className="text-black hover:text-green-500 font-semibold"
-            >
+            <Link to="/services" className="text-black hover:text-green-500 font-semibold">
               Services
-            </a>
-            <a
-              href="/contact"
-              className="text-black hover:text-green-500 font-semibold"
-            >
+            </Link>
+            <Link to="/contact" className="text-black hover:text-green-500 font-semibold">
               Contact
-            </a>
+            </Link>
 
-            <Link className="bg-green-500 text-white font-bold py-1 px-4 rounded hover:bg-blue-700 transition duration-300" to="/login">
-              Login
-            </Link>
-            <Link className="bg-green-500 text-white font-bold py-1 px-4 rounded hover:bg-blue-700 transition duration-300" to="/register">
-              Register
-            </Link>
+            {localStorage.getItem("token") ? (
+              <button
+                className="bg-green-500 text-white font-bold py-1 px-4 rounded hover:bg-blue-700 transition duration-300"
+                onClick={handleLogout}
+              >
+                Logout
+              </button>
+            ) : (
+              <div className="flex space-x-4">
+                <Link
+                  className="bg-green-500 text-white font-bold py-1 px-4 rounded hover:bg-blue-700 transition duration-300"
+                  to="/login"
+                >
+                  Login
+                </Link>
+                <Link
+                  className="bg-green-500 text-white font-bold py-1 px-4 rounded hover:bg-blue-700 transition duration-300"
+                  to="/register"
+                >
+                  Register
+                </Link>
+              </div>
+            )}
           </div>
 
           <div className="md:hidden">
-            <button
-              onClick={toggleMenu}
-              className="text-white focus:outline-none"
-            >
+            <button onClick={toggleMenu} className="text-black focus:outline-none">
               <svg
                 className="w-6 h-6"
                 fill="none"
@@ -72,38 +79,44 @@ const Header = () => {
             </button>
           </div>
         </div>
+
         {isOpen && (
-          <div className="md:hidden">
-            <a
-              href="/"
-              className="block px-2 py-1 text-white hover:bg-gray-700"
-            >
+          <div className="md:hidden bg-green-100 mt-2 space-y-2">
+            <Link to="/home" className="block px-2 py-1 text-black hover:bg-gray-700 hover:text-white">
               Home
-            </a>
-            <a
-              href="/about"
-              className="block px-2 py-1 text-white hover:bg-gray-700"
-            >
+            </Link>
+            <Link to="/about-us" className="block px-2 py-1 text-black hover:bg-gray-700 hover:text-white">
               About
-            </a>
-            <a
-              href="/services"
-              className="block px-2 py-1 text-white hover:bg-gray-700"
-            >
+            </Link>
+            <Link to="/services" className="block px-2 py-1 text-black hover:bg-gray-700 hover:text-white">
               Services
-            </a>
-            <a
-              href="/contact"
-              className="block px-2 py-1 text-white hover:bg-gray-700"
-            >
+            </Link>
+            <Link to="/contact" className="block px-2 py-1 text-black hover:bg-gray-700 hover:text-white">
               Contact
-            </a>
-            <Link className="bg-green-500 text-white font-bold py-1 px-4 rounded hover:bg-blue-700 transition duration-300" to="/login">
-              Login
             </Link>
-            <Link className="bg-green-500 text-white font-bold py-1 px-4 rounded hover:bg-blue-700 transition duration-300" to="/register">
-              Register
-            </Link>
+            {localStorage.getItem("token") ? (
+              <button
+                className="block bg-green-500 text-white font-bold py-1 px-4 rounded hover:bg-blue-700 transition duration-300"
+                onClick={handleLogout}
+              >
+                Logout
+              </button>
+            ) : (
+              <div className="flex flex-col space-y-2">
+                <Link
+                  className="block bg-green-500 text-white font-bold py-1 px-4 rounded hover:bg-blue-700 transition duration-300"
+                  to="/login"
+                >
+                  Login
+                </Link>
+                <Link
+                  className="block bg-green-500 text-white font-bold py-1 px-4 rounded hover:bg-blue-700 transition duration-300"
+                  to="/register"
+                >
+                  Register
+                </Link>
+              </div>
+            )}
           </div>
         )}
       </nav>
