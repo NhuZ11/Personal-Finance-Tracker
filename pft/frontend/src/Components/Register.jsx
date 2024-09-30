@@ -15,7 +15,7 @@ const Register = () => {
     e.preventDefault();
     const { username, email, password, cpassword } = credentials;
 
-    // Check if passwords match
+    // Check if passwords match (validation)
     if (password !== cpassword) {
       console.log("Passwords do not match");
       return;
@@ -46,6 +46,7 @@ const Register = () => {
     }
   };
 
+  // get user details from frontend as the value from the fields change the spread operator in credentials updates the value
   const onChange = (e) => {
     setCredentials({ ...credentials, [e.target.name]: e.target.value });
   };
@@ -173,3 +174,14 @@ const Register = () => {
 };
 
 export default Register;
+
+
+
+
+// get user details from frontend
+// validation 
+// check if user already exists
+// check for files
+// create user object - create entry in db
+// check for user creation
+// return response
