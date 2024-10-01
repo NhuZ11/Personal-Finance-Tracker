@@ -27,7 +27,8 @@ function App() {
           <Route path="/about-us" element={<Aboutus />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/dashboard" element={<Dashboard />} />
+          {localStorage.getItem("token") ? <Route path="/dashboard" element={<Dashboard />} />: <Route path="/error" element={<Error />} /> }
+         
         </Routes>
 
       </Router>

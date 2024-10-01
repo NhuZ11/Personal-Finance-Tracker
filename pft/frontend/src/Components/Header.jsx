@@ -22,26 +22,46 @@ const Header = () => {
             <a href="/">PFT</a>
           </div>
           <div className="hidden md:flex space-x-8 py-1 items-center text-lg">
-            <Link to="/home" className="text-black hover:text-green-500 font-semibold">
+            <Link
+              to="/home"
+              className="text-black hover:text-green-500 font-semibold"
+            >
               Home
             </Link>
-            <Link to="/about-us" className="text-black hover:text-green-500 font-semibold">
+            <Link
+              to="/about-us"
+              className="text-black hover:text-green-500 font-semibold"
+            >
               About
             </Link>
-            <Link to="/services" className="text-black hover:text-green-500 font-semibold">
+            <Link
+              to="/services"
+              className="text-black hover:text-green-500 font-semibold"
+            >
               Services
             </Link>
-            <Link to="/contact" className="text-black hover:text-green-500 font-semibold">
+            <Link
+              to="/contact"
+              className="text-black hover:text-green-500 font-semibold"
+            >
               Contact
             </Link>
 
             {localStorage.getItem("token") ? (
-              <button
-                className="bg-green-500 text-white font-bold py-1 px-4 rounded hover:bg-blue-700 transition duration-300"
-                onClick={handleLogout}
-              >
-                Logout
-              </button>
+              <div className="space-x-3">
+                <Link
+                  to="/dashboard"
+                  className="text-black hover:text-green-500 font-semibold"
+                >
+                  Dashboard
+                </Link>
+                <button
+                  className="bg-green-500 text-white font-bold py-1 px-4 rounded hover:bg-blue-700 transition duration-300"
+                  onClick={handleLogout}
+                >
+                  Logout
+                </button>
+              </div>
             ) : (
               <div className="flex space-x-4">
                 <Link
@@ -61,7 +81,10 @@ const Header = () => {
           </div>
 
           <div className="md:hidden">
-            <button onClick={toggleMenu} className="text-black focus:outline-none">
+            <button
+              onClick={toggleMenu}
+              className="text-black focus:outline-none"
+            >
               <svg
                 className="w-6 h-6"
                 fill="none"
@@ -82,16 +105,28 @@ const Header = () => {
 
         {isOpen && (
           <div className="md:hidden bg-green-100 mt-2 space-y-2">
-            <Link to="/home" className="block px-2 py-1 text-black hover:bg-gray-700 hover:text-white">
+            <Link
+              to="/home"
+              className="block px-2 py-1 text-black hover:bg-gray-700 hover:text-white"
+            >
               Home
             </Link>
-            <Link to="/about-us" className="block px-2 py-1 text-black hover:bg-gray-700 hover:text-white">
+            <Link
+              to="/about-us"
+              className="block px-2 py-1 text-black hover:bg-gray-700 hover:text-white"
+            >
               About
             </Link>
-            <Link to="/services" className="block px-2 py-1 text-black hover:bg-gray-700 hover:text-white">
+            <Link
+              to="/services"
+              className="block px-2 py-1 text-black hover:bg-gray-700 hover:text-white"
+            >
               Services
             </Link>
-            <Link to="/contact" className="block px-2 py-1 text-black hover:bg-gray-700 hover:text-white">
+            <Link
+              to="/contact"
+              className="block px-2 py-1 text-black hover:bg-gray-700 hover:text-white"
+            >
               Contact
             </Link>
             {localStorage.getItem("token") ? (
