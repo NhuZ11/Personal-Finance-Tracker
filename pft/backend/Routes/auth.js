@@ -59,7 +59,7 @@ router.post(
 router.post("/login", [
     
   body('email').isEmail(),
-  body('password').isLength({ min: 5 })],
+  body('password').isLength({ min: 8 })],
   async (req, res) => {
       const errors = validationResult(req);
       if (!errors.isEmpty()) {

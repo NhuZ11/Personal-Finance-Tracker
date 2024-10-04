@@ -14,6 +14,7 @@ const getFirstDayOfMonth = (month, year) => {
 const EventModal = ({ onClose, onSave, selectedDate, url }) => {
   const [eventType, setEventType] = useState("income");
   const [amount, setAmount] = useState("");
+  const [category, setCategory] = useState("");
   const [description, setDescription] = useState("");
 
   const handleSubmit = async (e) => {
@@ -22,6 +23,7 @@ const EventModal = ({ onClose, onSave, selectedDate, url }) => {
       eventType,
       amount: parseFloat(amount),
       description,
+      category,
       date: selectedDate.toISOString(),
     };
 
@@ -65,6 +67,18 @@ const EventModal = ({ onClose, onSave, selectedDate, url }) => {
               <option value="income">Income</option>
               <option value="expense">Expense</option>
               <option value="savings">Savings</option>
+            </select>
+          </label>
+          <label className="block mb-2">
+            Category:
+            <select
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+              className="border rounded w-full p-2"
+            >
+              <option value="income">Category 1</option>
+              <option value="expense">Category 2</option>
+              <option value="savings">Category 3</option>
             </select>
           </label>
           <label className="block mb-2">

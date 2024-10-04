@@ -2,29 +2,37 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import backgroundImage from "../assets/backgroundhero.jpg";
 
-const Login = () => {
+const Login = (props) => {
   const [credential, setCredential] = useState({ email: "", password: "" });
+  const [errorMessage, setErrorMessage] = useState(""); // State to store error message
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setErrorMessage(""); // Clear previous errors
     const { email, password } = credential;
-    const response = await fetch("http://localhost:8000/api/auth/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ email, password }),
-    });
-    const json = await response.json();
-    console.log("this is response ", json);
-    if (json) {
-      // Save the auth token and redirect
-      localStorage.setItem("token", json.authToken);
-      navigate("/dashboard");
-      props.showAlert("Account created ", "success");
-    } else {
-      props.showAlert("invalid credential", "danger");
+    try {
+      const response = await fetch("http://localhost:8000/api/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      });
+      const json = await response.json();
+      console.log("this is response ", json);
+
+      if (json.authToken) {
+        // Save the auth token and redirect
+        localStorage.setItem("token", json.authToken);
+        navigate("/dashboard");
+        props.showAlert("Account created", "success");
+      } else {
+        setErrorMessage("Invalid email or password. Please try again.");
+      }
+    } catch (error) {
+      console.error("Login error: ", error);
+      setErrorMessage("Something went wrong. Please try again later.");
     }
   };
 
@@ -34,7 +42,7 @@ const Login = () => {
 
   return (
     <div
-      className="flex items-start justify-center min-h-screen bg-gray-50 "
+      className="flex items-start justify-center min-h-screen bg-gray-50"
       style={{ backgroundImage: `url(${backgroundImage})` }}
     >
       <div className="w-full max-w-sm bg-white rounded-lg shadow-md p-6 mt-10">
@@ -44,11 +52,15 @@ const Login = () => {
             src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg"
             alt="logo"
           />
-          <span className="text-xl font-semibold">
-            Personal Finance Tracker
-          </span>
+          <span className="text-xl font-semibold">Personal Finance Tracker</span>
         </div>
         <h1 className="text-2xl font-bold mb-4">Sign in to your account</h1>
+        {/* Display error message if there is one */}
+        {errorMessage && (
+          <div className="mb-4 text-sm text-red-500 bg-red-100 p-2 rounded">
+            {errorMessage}
+          </div>
+        )}
         <form className="space-y-4" onSubmit={handleSubmit}>
           <div>
             <label
