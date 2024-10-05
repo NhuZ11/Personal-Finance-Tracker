@@ -34,6 +34,9 @@ app.get("/", (req, res) => {
 // for authorization basic routes/middleware
 app.use('/api/auth', require('./Routes/auth.js'))
 
+app.use('/api/auth', require('./Routes/route.js'))
+
+
 // Start the server
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
