@@ -15,8 +15,8 @@ const Dashboard = () => {
     const fetchUser = async () => {
       try {
         // Retrieve the token from local storage (or wherever you store it)
-        localStorage.getItem("auth-token")
-        const token = localStorage.getItem("auth-token")
+        
+        const token = localStorage.getItem("token")
 
         console.log(token)
         if (!token) {
@@ -31,6 +31,8 @@ const Dashboard = () => {
             "auth-token": token, // Send the token as part of the headers
           },
         });
+
+       
 
         // Set the user data in state
         setUser(res.data);
@@ -47,7 +49,7 @@ const Dashboard = () => {
   return (
     <div className='w-full'>
       {error && <p>{error}</p>}
-      <h1>Welcome, {user._id}</h1>
+      <h1>Welcome, {user.username} </h1>
       <SimpleCalendar />
     </div>
   )
