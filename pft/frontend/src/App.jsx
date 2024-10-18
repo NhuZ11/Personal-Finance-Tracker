@@ -8,6 +8,7 @@ import Aboutus from './Components/Aboutus';
 import Login from './Components/Login';
 import Register from './Components/Register';
 import Dashboard from './Components/Dashboard';
+import AdminDashboard from './Components/AdminDashboard';
 
 function App() {
  
@@ -27,6 +28,7 @@ function App() {
           <Route path="/about-us" element={<Aboutus />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          {localStorage.getItem("token") ? <Route path="/admindashboard" element={<AdminDashboard />} />: <Route path="/error" element={<Error />} /> }
           {localStorage.getItem("token") ? <Route path="/dashboard" element={<Dashboard />} />: <Route path="/error" element={<Error />} /> }
          
         </Routes>

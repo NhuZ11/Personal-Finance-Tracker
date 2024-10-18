@@ -25,7 +25,11 @@ const Login = (props) => {
       if (json.authToken) {
         // Save the auth token and redirect
         localStorage.setItem("token", json.authToken);
-        navigate("/dashboard");
+        if (email === "admin@gmail.com") {
+          navigate("/admindashboard");
+        } else {
+          navigate("/dashboard");
+        }
         props.showAlert("Account created", "success");
       } else {
         setErrorMessage("Invalid email or password. Please try again.");
