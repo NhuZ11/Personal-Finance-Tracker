@@ -36,6 +36,8 @@ app.use('/api/auth', require('./Routes/auth.js'))
 
 app.use('/api/auth', require('./Routes/route.js'))
 
+app.use('/api/auth', require('./Routes/categoryRoute.js'))
+
 
 // Start the server
 app.listen(PORT, () => {

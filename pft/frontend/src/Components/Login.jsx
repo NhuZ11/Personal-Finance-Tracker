@@ -30,7 +30,7 @@ const Login = (props) => {
         } else {
           navigate("/dashboard");
         }
-        props.showAlert("Account created", "success");
+        console.log("Account login", "success");
       } else {
         setErrorMessage("Invalid email or password. Please try again.");
       }

@@ -35,7 +35,7 @@ const Register = () => {
 
       if (response.ok) {
         // Save the auth token and redirect to login
-        localStorage.setItem("token", json.authToken);
+        // localStorage.setItem("token", json.authToken);  doesnot seem right might change later
         navigate("/login");
         console.log("Success: Account created");
       } else {
