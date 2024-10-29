@@ -54,7 +54,7 @@ router.get('/get-category', async (req, res)=>{
 
 
 //update category
-router.patch('/update-category/:_id', async(req,res) =>{
+router.put('/update-category/:_id', async(req,res) =>{
   const updatedCategory = await Category.findByIdAndUpdate(req.params._id, req.body,{
     new: true,
     runValidators: true
