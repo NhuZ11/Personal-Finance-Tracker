@@ -54,12 +54,14 @@ const EventModal = ({ onClose, onSave, selectedDate, url }) => {
                 onChange={(e) => setEventType(e.target.value)}
                 className="border rounded w-full p-2"
               >
-                <option value="income">Income</option>
-                <option value="expense">Expense</option>
-                <option value="savings">Savings</option>
+                <option value="Income">Income</option>
+                <option value="Expense">Expense</option>
+                <option value="Saving">Saving</option>
               </select>
             </label>
-            <label className="block mb-2">
+         
+          
+          <label className="block mb-2">
               Category:
               <select
                 value={category}
