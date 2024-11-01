@@ -19,6 +19,7 @@ const SimpleCalendar = () => {
   const [showModal, setShowModal] = useState(false);
   const [selectedDate, setSelectedDate] = useState(null);
 
+
   // Replace with your backend URL
   const backendUrl = "https://your-backend-api.com/events";
 

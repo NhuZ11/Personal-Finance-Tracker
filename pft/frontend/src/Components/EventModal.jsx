@@ -109,5 +109,3 @@ const EventModal = ({ onClose, onSave, selectedDate, url }) => {
 
 export default EventModal
 
-
-54a6s5d4f6asd54f6asd54f6

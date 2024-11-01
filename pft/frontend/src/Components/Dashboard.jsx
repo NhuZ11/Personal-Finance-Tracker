@@ -1,15 +1,16 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useState, useContext} from 'react'
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import CalendarComp from './CalendarComponent';
 import CalendarNew from './CalendarNew';
 import SimpleCalendar from './SimpleCalendar';
 import axios from "axios";
+import CategoryContext from '../Context/CategoryContext';
 
 const Dashboard = () => {
   const [user, setUser] = useState([]);
   const [error, setError] = useState(null);
-
+  const { categories, selectedCategory, setSelectedCategory } = useContext(CategoryContext);
   useEffect(()=>{
 
     const fetchUser = async () => {
@@ -31,7 +32,7 @@ const Dashboard = () => {
             "auth-token": token, // Send the token as part of the headers
           },
         });
-
+        console.log(categories)
        
 
         // Set the user data in state

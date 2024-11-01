@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, createContext, useContext, } from 'react'
 
 import './App.css'
 import { BrowserRouter as Router, Route, Link, Routes } from "react-router-dom";
@@ -9,14 +9,15 @@ import Login from './Components/Login';
 import Register from './Components/Register';
 import Dashboard from './Components/Dashboard';
 import AdminDashboard from './Components/AdminDashboard';
+import CategoryContext, { CategoryProvider } from './Context/CategoryContext';
 
 function App() {
- 
+  const Context = createContext();
 
   return (
     <>
      <div>
-      
+      <CategoryProvider>
       <Router>
         <header>
           <Header />
@@ -34,6 +35,7 @@ function App() {
         </Routes>
 
       </Router>
+      </CategoryProvider>
      </div>
     </>
   )
