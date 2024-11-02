@@ -10,6 +10,7 @@ import Register from './Components/Register';
 import Dashboard from './Components/Dashboard';
 import AdminDashboard from './Components/AdminDashboard';
 import CategoryContext, { CategoryProvider } from './Context/CategoryContext';
+import EventModal from './Components/EventModal';
 
 function App() {
   const Context = createContext();
@@ -29,6 +30,7 @@ function App() {
           <Route path="/about-us" element={<Aboutus />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/event" element={<EventModal />} />
           {localStorage.getItem("token") ? <Route path="/admindashboard" element={<AdminDashboard />} />: <Route path="/error" element={<Error />} /> }
           {localStorage.getItem("token") ? <Route path="/dashboard" element={<Dashboard />} />: <Route path="/error" element={<Error />} /> }
          

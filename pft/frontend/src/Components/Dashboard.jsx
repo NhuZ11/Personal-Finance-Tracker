@@ -11,6 +11,8 @@ const Dashboard = () => {
   const [user, setUser] = useState([]);
   const [error, setError] = useState(null);
   const { categories, selectedCategory, setSelectedCategory } = useContext(CategoryContext);
+  console.log(categories)
+  
   useEffect(()=>{
 
     const fetchUser = async () => {
@@ -32,7 +34,7 @@ const Dashboard = () => {
             "auth-token": token, // Send the token as part of the headers
           },
         });
-        console.log(categories)
+     
        
 
         // Set the user data in state
@@ -51,7 +53,7 @@ const Dashboard = () => {
     <div className='w-full'>
       {error && <p>{error}</p>}
       <h1>Welcome, {user.username} </h1>
-      <SimpleCalendar />
+      <SimpleCalendar category= {categories}/>
     </div>
   )
 }

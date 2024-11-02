@@ -14,10 +14,11 @@ const AdminDashboard = () => {
       setCategories(res.data.data.categories);
     });
   }, []);
-
+  console.log(categories)
   return (
     <div>
       <h2>Admin Dashboard</h2>
+      
       <button
         className="bg-green-300 text-white px-4 py-2 rounded"
         onClick={() => setShowModal(true)}
