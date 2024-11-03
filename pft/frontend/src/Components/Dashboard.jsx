@@ -53,7 +53,7 @@ const Dashboard = () => {
     <div className='w-full'>
       {error && <p>{error}</p>}
       <h1>Welcome, {user.username} </h1>
-      <SimpleCalendar category= {categories}/>
+      <SimpleCalendar/>
     </div>
   )
 }

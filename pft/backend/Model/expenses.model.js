@@ -7,6 +7,11 @@ const expenseSchema = new mongoose.Schema({
    },
    category: {
     type: String,
+    required: true
+  },
+  description: {
+    type: String,
+    required: true
   },
     createdBy: {
         type: mongoose.Schema.Types.ObjectId,

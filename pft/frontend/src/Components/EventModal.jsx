@@ -4,7 +4,7 @@ import CategoryContext from '../Context/CategoryContext';
 
 // Event Modal Component
 const EventModal = ({ onClose, onSave, selectedDate, url }) => {
-  const [eventType, setEventType] = useState("income");
+  const [eventType, setEventType] = useState("Income");
   const [amount, setAmount] = useState("");
   const [category, setCategory] = useState("");
   const [description, setDescription] = useState("");
@@ -39,6 +39,41 @@ const EventModal = ({ onClose, onSave, selectedDate, url }) => {
     setEventType(newEventType);
     setSelectedCategory(newEventType); // Update the selected category based on event type
   };
+
+
+  const eventSubmit = async (e) => {
+    e.preventDefault();
+
+    const eventData = {
+      eventType,
+      amount: parseFloat(amount),
+      description,
+      category,
+      date: selectedDate.toISOString(),
+    };
+
+    // Define different URLs based on the event type
+    const eventUrls = {
+      Income: `${url}/income`,
+      Expense: `${url}/expense`,
+      Saving: `${url}/saving`,
+    };
+
+    try {
+      // Send data to the appropriate endpoint based on event type
+      const response = await axios.post(eventUrls[eventType], eventData, {
+        headers: { 'Content-Type': 'application/json' },
+      });
+
+      // Call onSave to update the state in the parent component
+      onSave(eventData);
+      onClose(); // Close the modal after saving
+    } catch (error) {
+      console.error("Error saving event:", error);
+    }
+  };
+
+
 
   // Format the selected date to a readable string
   const formattedDate = selectedDate ? selectedDate.toLocaleDateString() : '';
@@ -102,7 +137,7 @@ const EventModal = ({ onClose, onSave, selectedDate, url }) => {
             <button type="button" onClick={onClose} className="px-4 py-2 bg-gray-300 text-gray-700 rounded">
               Cancel
             </button>
-            <button type="submit" className="px-4 py-2 bg-blue-500 text-white rounded">
+            <button type="submit" className="px-4 py-2 bg-blue-500 text-white rounded" onClick={eventSubmit}>
               Save Event
             </button>
           </div>
