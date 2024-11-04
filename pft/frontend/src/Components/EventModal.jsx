@@ -10,6 +10,8 @@ const EventModal = ({ onClose, onSave, selectedDate, url }) => {
   const [description, setDescription] = useState("");
   const { categories, selectedCategory, setSelectedCategory } = useContext(CategoryContext);
 
+ 
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const eventData = {
@@ -19,8 +21,12 @@ const EventModal = ({ onClose, onSave, selectedDate, url }) => {
       category,
       date: selectedDate.toISOString(),
     };
-
+    console.log(eventType)
     try {
+
+      if(eventType == "Income"){
+        console.log("this is income")
+      }
       const response = await axios.post(url, eventData, {
         headers: { 'Content-Type': 'application/json' },
       });
@@ -43,6 +49,7 @@ const EventModal = ({ onClose, onSave, selectedDate, url }) => {
 
   const eventSubmit = async (e) => {
     e.preventDefault();
+
 
     const eventData = {
       eventType,
