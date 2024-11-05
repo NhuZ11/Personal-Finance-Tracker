@@ -38,6 +38,8 @@ app.use('/api/auth', require('./Routes/route.js'))
 
 app.use('/api/auth', require('./Routes/categoryRoute.js'))
 
+app.use('/api/auth', require('./Routes/eventRoute.js'))
+
 
 // Start the server
 app.listen(PORT, () => {

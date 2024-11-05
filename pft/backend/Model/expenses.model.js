@@ -4,6 +4,7 @@ const expenseSchema = new mongoose.Schema({
    amount:{
     type: Number,
     default: 0,
+    required: true
    },
    category: {
     type: String,
@@ -13,9 +14,10 @@ const expenseSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-    createdBy: {
+  userId: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "User"
+        ref: "User",
+      
     }
 },{timestamps: true})
 

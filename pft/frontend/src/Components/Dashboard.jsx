@@ -6,6 +6,7 @@ import CalendarNew from './CalendarNew';
 import SimpleCalendar from './SimpleCalendar';
 import axios from "axios";
 import CategoryContext from '../Context/CategoryContext';
+import Stats from './Stats';
 
 const Dashboard = () => {
   const [user, setUser] = useState([]);
@@ -54,6 +55,8 @@ const Dashboard = () => {
       {error && <p>{error}</p>}
       <h1>Welcome, {user.username} </h1>
       <SimpleCalendar/>
+      <Stats />
+      
     </div>
   )
 }

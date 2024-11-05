@@ -1,6 +1,6 @@
-import React, { useState, useContext } from 'react';
-import axios from 'axios';
-import CategoryContext from '../Context/CategoryContext';
+import React, { useState, useContext } from "react";
+import Axios from "axios";
+import CategoryContext from "../Context/CategoryContext";
 
 // Event Modal Component
 const EventModal = ({ onClose, onSave, selectedDate, url }) => {
@@ -8,12 +8,14 @@ const EventModal = ({ onClose, onSave, selectedDate, url }) => {
   const [amount, setAmount] = useState("");
   const [category, setCategory] = useState("");
   const [description, setDescription] = useState("");
-  const { categories, selectedCategory, setSelectedCategory } = useContext(CategoryContext);
+  const { categories, selectedCategory, setSelectedCategory } =
+    useContext(CategoryContext);
 
- 
-
-  const handleSubmit = async (e) => {
+  console.log(eventType);
+  const eventSubmit = async (e) => {
     e.preventDefault();
+    
+    // Prepare event data
     const eventData = {
       eventType,
       amount: parseFloat(amount),
@@ -21,23 +23,37 @@ const EventModal = ({ onClose, onSave, selectedDate, url }) => {
       category,
       date: selectedDate.toISOString(),
     };
-    console.log(eventType)
+  
+    // Retrieve the authentication token
+    const token = localStorage.getItem("token"); // or your method of storing the token
+  
     try {
-
-      if(eventType == "Income"){
-        console.log("this is income")
+      let endpoint = "";
+      
+      // Determine the correct endpoint based on the event type
+      if (eventType === "Income") {
+        endpoint = "http://localhost:8000/api/auth/add-income"; // Change to your income endpoint
+      } else if (eventType === "Expense") {
+        endpoint = "http://localhost:8000/api/auth/add-expenses"; // Existing expense endpoint
+      } else if (eventType === "Saving") {
+        endpoint = "http://localhost:8000/api/auth/add-saving"; // Change to your saving endpoint
       }
-      const response = await axios.post(url, eventData, {
-        headers: { 'Content-Type': 'application/json' },
+  
+      // Make the API request
+      const response = await Axios.post(endpoint, eventData, {
+        headers: {
+          "auth-token": token, // Include the token in the request headers
+        },
       });
-
-      // Call onSave to update the state in the parent component
-      onSave(eventData);
-      onClose(); // Close the modal after saving
+  
+      alert(`${eventType} added successfully!`);
+      onClose(); // Close the modal after success
     } catch (error) {
-      console.error("Error saving event:", error);
+      alert(`Failed to add ${eventType.toLowerCase()}`);
+      console.error("Error:", error.response ? error.response.data : error.message);
     }
   };
+  
 
   // Update selected category based on event type
   const handleEventTypeChange = (e) => {
@@ -46,50 +62,16 @@ const EventModal = ({ onClose, onSave, selectedDate, url }) => {
     setSelectedCategory(newEventType); // Update the selected category based on event type
   };
 
-
-  const eventSubmit = async (e) => {
-    e.preventDefault();
-
-
-    const eventData = {
-      eventType,
-      amount: parseFloat(amount),
-      description,
-      category,
-      date: selectedDate.toISOString(),
-    };
-
-    // Define different URLs based on the event type
-    const eventUrls = {
-      Income: `${url}/income`,
-      Expense: `${url}/expense`,
-      Saving: `${url}/saving`,
-    };
-
-    try {
-      // Send data to the appropriate endpoint based on event type
-      const response = await axios.post(eventUrls[eventType], eventData, {
-        headers: { 'Content-Type': 'application/json' },
-      });
-
-      // Call onSave to update the state in the parent component
-      onSave(eventData);
-      onClose(); // Close the modal after saving
-    } catch (error) {
-      console.error("Error saving event:", error);
-    }
-  };
-
-
-
   // Format the selected date to a readable string
-  const formattedDate = selectedDate ? selectedDate.toLocaleDateString() : '';
+  const formattedDate = selectedDate ? selectedDate.toLocaleDateString() : "";
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
       <div className="bg-white p-6 rounded shadow-lg">
-        <h2 className="text-xl font-bold mb-4">Add Event for {formattedDate}</h2>
-        <form onSubmit={handleSubmit}>
+        <h2 className="text-xl font-bold mb-4">
+          Add Event for {formattedDate}
+        </h2>
+        <form onSubmit={eventSubmit}>
           <label className="block mb-2">
             Event Type:
             <select
@@ -110,14 +92,17 @@ const EventModal = ({ onClose, onSave, selectedDate, url }) => {
               onChange={(e) => setCategory(e.target.value)}
               className="border rounded w-full p-2"
             >
-              {categories.map((val, key) => (
-                val.category === selectedCategory && (
-                  <option key={key} value={val.name}>{val.name}</option>
-                )
-              ))}
+              {categories.map(
+                (val, key) =>
+                  val.category === selectedCategory && (
+                    <option key={key} value={val.name}>
+                      {val.name}
+                    </option>
+                  )
+              )}
             </select>
           </label>
-          
+
           <label className="block mb-2">
             Amount:
             <input
@@ -128,7 +113,7 @@ const EventModal = ({ onClose, onSave, selectedDate, url }) => {
               required
             />
           </label>
-          
+
           <label className="block mb-2">
             Description:
             <input
@@ -141,10 +126,17 @@ const EventModal = ({ onClose, onSave, selectedDate, url }) => {
           </label>
 
           <div className="flex justify-between mt-4">
-            <button type="button" onClick={onClose} className="px-4 py-2 bg-gray-300 text-gray-700 rounded">
+            <button
+              type="button"
+              onClick={onClose}
+              className="px-4 py-2 bg-gray-300 text-gray-700 rounded"
+            >
               Cancel
             </button>
-            <button type="submit" className="px-4 py-2 bg-blue-500 text-white rounded" onClick={eventSubmit}>
+            <button
+              type="submit"
+              className="px-4 py-2 bg-blue-500 text-white rounded"
+            >
               Save Event
             </button>
           </div>
