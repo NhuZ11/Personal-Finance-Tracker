@@ -32,11 +32,11 @@ const EventModal = ({ onClose, onSave, selectedDate, url }) => {
       
       // Determine the correct endpoint based on the event type
       if (eventType === "Income") {
-        endpoint = "http://localhost:8000/api/auth/add-income"; // Change to your income endpoint
+        endpoint = "http://localhost:8000/api/auth/add-incomes"; // Change to your income endpoint
       } else if (eventType === "Expense") {
         endpoint = "http://localhost:8000/api/auth/add-expenses"; // Existing expense endpoint
       } else if (eventType === "Saving") {
-        endpoint = "http://localhost:8000/api/auth/add-saving"; // Change to your saving endpoint
+        endpoint = "http://localhost:8000/api/auth/add-savings"; // Change to your saving endpoint
       }
   
       // Make the API request

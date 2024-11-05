@@ -14,7 +14,7 @@ const savingSchema = new mongoose.Schema(
           type: String,
           required: true
         },
-        createdBy: {
+        userId: {
           type: mongoose.Schema.Types.ObjectId,
           ref: "User",
         },
