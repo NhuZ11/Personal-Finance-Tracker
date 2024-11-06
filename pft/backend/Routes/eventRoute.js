@@ -98,7 +98,20 @@ router.post(
   }
 );
 
-
+router.get("/get-incomes", authenticateUser, async (req, res) => {
+  try {
+    const incomes = await Incomes.find({ userId: req.user.id });
+    res.status(200).json({
+      status: "Success",
+      data: { incomes },
+    });
+  } catch (err) {
+    res.status(500).json({
+      status: "Failed",
+      message: err.message,
+    });
+  }
+});
 
 
 
@@ -141,6 +154,21 @@ router.post(
     }
   }
 );
+
+router.get("/get-savings", authenticateUser, async (req, res) => {
+  try {
+    const savings = await Savings.find({ userId: req.user.id });
+    res.status(200).json({
+      status: "Success",
+      data: { savings },
+    });
+  } catch (err) {
+    res.status(500).json({
+      status: "Failed",
+      message: err.message,
+    });
+  }
+});
 
 
 
