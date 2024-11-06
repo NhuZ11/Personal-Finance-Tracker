@@ -106,44 +106,79 @@ const Stats = () => {
     <div>
       <h2>Expenses</h2>
       {expenses.length > 0 ? (
-        <ul>
-          {expenses.map((expense, index) => (
-            <li key={index}>
-              {expense.category} {expense.description} - ${expense.amount} on{" "}
-              {new Date(expense.date).toLocaleDateString()}
-            </li>
-          ))}
-        </ul>
+        <table>
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Category</th>
+              <th>Description</th>
+              <th>Amount</th>
+            </tr>
+          </thead>
+          <tbody>
+            {expenses.map((expense, index) => (
+              <tr key={index}>
+                <td>{new Date(expense.createdAt).toLocaleDateString()}</td>
+                <td>{expense.category}</td>
+                <td>{expense.description}</td>
+                <td>${expense.amount}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       ) : (
         <p>No expenses available.</p>
       )}
 
       <h2>Incomes</h2>
       {incomes.length > 0 ? (
-        <ul>
-          {incomes.map((income, index) => (
-            <li key={index}>
-              {income.category} {income.description} - ${income.amount} on{" "}
-              {new Date(income.date).toLocaleDateString()}
-            </li>
-          ))}
-        </ul>
+        <table>
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Category</th>
+              <th>Description</th>
+              <th>Amount</th>
+            </tr>
+          </thead>
+          <tbody>
+            {incomes.map((income, index) => (
+              <tr key={index}>
+                <td>{new Date(income.createdAt).toLocaleDateString()}</td>
+                <td>{income.category}</td>
+                <td>{income.description}</td>
+                <td>${income.amount}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       ) : (
-        <p>No Incomes available.</p>
+        <p>No incomes available.</p>
       )}
-
       <h2>Savings</h2>
       {savings.length > 0 ? (
-        <ul>
-          {savings.map((saving, index) => (
-            <li key={index}>
-              {saving.category} {saving.description} - ${saving.amount} on{" "}
-              {new Date(saving.createdAt).toLocaleDateString()}
-            </li>
-          ))}
-        </ul>
+        <table>
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Category</th>
+              <th>Description</th>
+              <th>Amount</th>
+            </tr>
+          </thead>
+          <tbody>
+            {savings.map((saving, index) => (
+              <tr key={index}>
+                <td>{new Date(saving.createdAt).toLocaleDateString()}</td>
+                <td>{saving.category}</td>
+                <td>{saving.description}</td>
+                <td>${saving.amount}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       ) : (
-        <p>No saving available.</p>
+        <p>No savings available.</p>
       )}
     </div>
   );

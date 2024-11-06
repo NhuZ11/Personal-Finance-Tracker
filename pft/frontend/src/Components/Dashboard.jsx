@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useContext} from 'react'
+import React, { useEffect, useState, useContext } from 'react';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import CalendarComp from './CalendarComponent';
@@ -11,54 +11,63 @@ import Stats from './Stats';
 const Dashboard = () => {
   const [user, setUser] = useState([]);
   const [error, setError] = useState(null);
+  const [activeSection, setActiveSection] = useState("Dashboard"); // State to track active section
   const { categories, selectedCategory, setSelectedCategory } = useContext(CategoryContext);
-  console.log(categories)
-  
-  useEffect(()=>{
 
+  useEffect(() => {
     const fetchUser = async () => {
       try {
-        // Retrieve the token from local storage (or wherever you store it)
-        
-        const token = localStorage.getItem("token")
-
-        console.log(token)
+        const token = localStorage.getItem("token");
         if (!token) {
           setError("No authentication token found. Please log in.");
           return;
         }
 
-        // Send the GET request with the token in the headers
         const res = await axios.get("http://localhost:8000/api/auth/getuser", {
-        
           headers: {
-            "auth-token": token, // Send the token as part of the headers
+            "auth-token": token,
           },
         });
-     
-       
 
-        // Set the user data in state
         setUser(res.data);
-        console.log(res.data)
       } catch (error) {
-        // Handle any error that occurs
         setError("Failed to fetch user data.");
         console.error(error);
       }
     };
 
-    fetchUser(); // Call the function when the component mounts
-  },[])
+    fetchUser();
+  }, []);
+
+  const renderSection = () => {
+    switch (activeSection) {
+      case "Dashboard":
+        return <SimpleCalendar />;
+      case "Stats":
+        return <Stats />;
+      case "Profile":
+        return <div><h2>User Profile</h2><p>Username: {user.username}</p></div>;
+      default:
+        return <SimpleCalendar />;
+    }
+  };
+
   return (
     <div className='w-full'>
       {error && <p>{error}</p>}
-      <h1>Welcome, {user.username} </h1>
-      <SimpleCalendar/>
-      <Stats />
-      
-    </div>
-  )
-}
 
-export default Dashboard
+      {/* Top Bar with Buttons */}
+      <div className="top-bar flex justify-center ">
+        <button className='bg-green-200 p-2 m-2' onClick={() => setActiveSection("Dashboard")}>Dashboard</button>
+        <button className='bg-green-200 p-2 m-2' onClick={() => setActiveSection("Stats")}>Stats</button>
+        <button className='bg-green-200 p-2 m-2' onClick={() => setActiveSection("Profile")}>Profile</button>
+      </div>
+
+      {/* Render the active section */}
+      <h1 className='ms-[150px] text-xl font-bold'>Welcome, {user.username}</h1>
+      {renderSection()}
+    </div>
+  );
+};
+
+export default Dashboard;
