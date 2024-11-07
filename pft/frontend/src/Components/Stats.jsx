@@ -104,24 +104,29 @@ const Stats = () => {
 
   return (
     <div>
-      <h2>Expenses</h2>
+      <h2 className="mt- text-2xl">Expenses</h2>
       {expenses.length > 0 ? (
-        <table>
-          <thead>
+        <table className="min-w-full border border-gray-300 bg-white rounded-md shadow-lg">
+          <thead className="bg-gray-100 text-gray-600 uppercase text-sm leading-normal">
             <tr>
-              <th>Date</th>
-              <th>Category</th>
-              <th>Description</th>
-              <th>Amount</th>
+              <th className="py-3 px-6 text-left">Date</th>
+              <th className="py-3 px-6 text-left">Category</th>
+              <th className="py-3 px-6 text-left">Description</th>
+              <th className="py-3 px-6 text-right">Amount</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className="text-gray-700 text-sm font-light">
             {expenses.map((expense, index) => (
-              <tr key={index}>
-                <td>{new Date(expense.createdAt).toLocaleDateString()}</td>
-                <td>{expense.category}</td>
-                <td>{expense.description}</td>
-                <td>${expense.amount}</td>
+              <tr
+                key={index}
+                className="border-b border-gray-200 hover:bg-gray-50"
+              >
+                <td className="py-3 px-6 text-left whitespace-nowrap">
+                  {new Date(expense.createdAt).toLocaleDateString()}
+                </td>
+                <td className="py-3 px-6 text-left">{expense.category}</td>
+                <td className="py-3 px-6 text-left">{expense.description}</td>
+                <td className="py-3 px-6 text-right">${expense.amount}</td>
               </tr>
             ))}
           </tbody>
@@ -130,24 +135,29 @@ const Stats = () => {
         <p>No expenses available.</p>
       )}
 
-      <h2>Incomes</h2>
+      <h2 className="mt- text-2xl">Incomes</h2>
       {incomes.length > 0 ? (
-        <table>
-          <thead>
+        <table className="min-w-full border border-gray-300 bg-white rounded-md shadow-lg">
+          <thead className="bg-gray-100 text-gray-600 uppercase text-sm leading-normal">
             <tr>
-              <th>Date</th>
-              <th>Category</th>
-              <th>Description</th>
-              <th>Amount</th>
+              <th className="py-3 px-6 text-left">Date</th>
+              <th className="py-3 px-6 text-left">Category</th>
+              <th className="py-3 px-6 text-left">Description</th>
+              <th className="py-3 px-6 text-right">Amount</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className="text-gray-700 text-sm font-light">
             {incomes.map((income, index) => (
-              <tr key={index}>
-                <td>{new Date(income.createdAt).toLocaleDateString()}</td>
-                <td>{income.category}</td>
-                <td>{income.description}</td>
-                <td>${income.amount}</td>
+              <tr
+                key={index}
+                className="border-b border-gray-200 hover:bg-gray-50"
+              >
+                <td className="py-3 px-6 text-left whitespace-nowrap">
+                  {new Date(income.createdAt).toLocaleDateString()}
+                </td>
+                <td className="py-3 px-6 text-left">{income.category}</td>
+                <td className="py-3 px-6 text-left">{income.description}</td>
+                <td className="py-3 px-6 text-right">${income.amount}</td>
               </tr>
             ))}
           </tbody>
@@ -155,24 +165,29 @@ const Stats = () => {
       ) : (
         <p>No incomes available.</p>
       )}
-      <h2>Savings</h2>
+      <h2  className="mt-5">Savings</h2>
       {savings.length > 0 ? (
-        <table>
-          <thead>
+        <table className="min-w-full border border-gray-300 bg-white rounded-md shadow-lg">
+          <thead className="bg-gray-100 text-gray-600 uppercase text-sm leading-normal">
             <tr>
-              <th>Date</th>
-              <th>Category</th>
-              <th>Description</th>
-              <th>Amount</th>
+              <th className="py-3 px-6 text-left">Date</th>
+              <th className="py-3 px-6 text-left">Category</th>
+              <th className="py-3 px-6 text-left">Description</th>
+              <th className="py-3 px-6 text-right">Amount</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className="text-gray-700 text-sm font-light">
             {savings.map((saving, index) => (
-              <tr key={index}>
-                <td>{new Date(saving.createdAt).toLocaleDateString()}</td>
-                <td>{saving.category}</td>
-                <td>{saving.description}</td>
-                <td>${saving.amount}</td>
+              <tr
+                key={index}
+                className="border-b border-gray-200 hover:bg-gray-50"
+              >
+                <td className="py-3 px-6 text-left whitespace-nowrap">
+                  {new Date(saving.createdAt).toLocaleDateString()}
+                </td>
+                <td className="py-3 px-6 text-left">{saving.category}</td>
+                <td className="py-3 px-6 text-left">{saving.description}</td>
+                <td className="py-3 px-6 text-right">${saving.amount}</td>
               </tr>
             ))}
           </tbody>
