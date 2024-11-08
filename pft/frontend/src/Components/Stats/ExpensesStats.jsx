@@ -3,23 +3,24 @@ import Axios from "axios";
 
 const ExpensesStats = () => {
   const [expenses, setExpenses] = useState([]);
+  const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth() + 1); // Default to current month
 
   useEffect(() => {
     const fetchExpenses = async () => {
-      const token = localStorage.getItem("token"); // Retrieve the token from local storage
+      const token = localStorage.getItem("token");
 
       try {
         const res = await Axios.get(
           "http://localhost:8000/api/auth/get-expenses",
           {
             headers: {
-              "auth-token": token, // Include the token in the request headers
+              "auth-token": token,
             },
           }
         );
 
         if (res.data && res.data.data && res.data.data.expenses) {
-          setExpenses(res.data.data.expenses); // Adjust based on your actual response structure
+          setExpenses(res.data.data.expenses);
         } else {
           console.error("Unexpected response structure:", res.data);
         }
@@ -34,15 +35,37 @@ const ExpensesStats = () => {
     fetchExpenses();
   }, []);
 
-  console.log(expenses);
-  const totalExpenses = expenses.reduce(
+  // Handle month selection
+  const handleMonthChange = (event) => {
+    setSelectedMonth(parseInt(event.target.value));
+  };
+
+  // Filter expenses by selected month
+  const filteredExpenses = expenses.filter((expense) => {
+    const expenseDate = new Date(expense.date);
+    return expenseDate.getMonth() + 1 === selectedMonth;
+  });
+
+  const totalExpenses = filteredExpenses.reduce(
     (total, expense) => total + expense.amount,
     0
   );
+
   return (
     <div>
       <h2 className="mt- text-2xl">Expenses</h2>
-      {expenses.length > 0 ? (
+      <div className="mb-4">
+        <label htmlFor="month">Filter by Month: </label>
+        <select id="month" value={selectedMonth} onChange={handleMonthChange}>
+          {[...Array(12)].map((_, index) => (
+            <option key={index} value={index + 1}>
+              {new Date(0, index).toLocaleString("default", { month: "long" })}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      {filteredExpenses.length > 0 ? (
         <table className="min-w-full border border-gray-300 bg-white rounded-md shadow-lg">
           <thead className="bg-gray-100 text-gray-600 uppercase text-sm leading-normal">
             <tr>
@@ -53,7 +76,7 @@ const ExpensesStats = () => {
             </tr>
           </thead>
           <tbody className="text-gray-700 text-sm font-light">
-            {expenses.map((expense, index) => (
+            {filteredExpenses.map((expense, index) => (
               <tr
                 key={index}
                 className="border-b border-gray-200 hover:bg-gray-50"
@@ -69,7 +92,7 @@ const ExpensesStats = () => {
           </tbody>
         </table>
       ) : (
-        <p>No expenses available.</p>
+        <p>No expenses available for the selected month.</p>
       )}
       <div className="py-3 px-6 text-right font-bold">
         Total Expenses: ${totalExpenses.toFixed(2)}

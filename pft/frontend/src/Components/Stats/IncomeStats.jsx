@@ -3,22 +3,24 @@ import Axios from "axios";
 
 const IncomeStats = () => {
   const [incomes, setIncomes] = useState([]);
+  const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth() + 1); // Default to current month
+
   useEffect(() => {
     const fetchIncomes = async () => {
-      const token = localStorage.getItem("token"); // Retrieve the token from local storage
+      const token = localStorage.getItem("token");
 
       try {
         const res = await Axios.get(
           "http://localhost:8000/api/auth/get-incomes",
           {
             headers: {
-              "auth-token": token, // Include the token in the request headers
+              "auth-token": token,
             },
           }
         );
 
         if (res.data && res.data.data && res.data.data.incomes) {
-          setIncomes(res.data.data.incomes); // Adjust based on your actual response structure
+          setIncomes(res.data.data.incomes);
         } else {
           console.error("Unexpected response structure:", res.data);
         }
@@ -33,16 +35,37 @@ const IncomeStats = () => {
     fetchIncomes();
   }, []);
 
-  console.log(incomes);
+  // Handle month selection
+  const handleMonthChange = (event) => {
+    setSelectedMonth(parseInt(event.target.value));
+  };
 
-  const totalIncomes = incomes.reduce(
+  // Filter incomes by selected month
+  const filteredIncomes = incomes.filter((income) => {
+    const incomeDate = new Date(income.date);
+    return incomeDate.getMonth() + 1 === selectedMonth;
+  });
+
+  const totalIncomes = filteredIncomes.reduce(
     (total, income) => total + income.amount,
     0
   );
+
   return (
     <div>
       <h2 className="mt- text-2xl">Incomes</h2>
-      {incomes.length > 0 ? (
+      <div className="mb-4">
+        <label htmlFor="month">Filter by Month: </label>
+        <select id="month" value={selectedMonth} onChange={handleMonthChange}>
+          {[...Array(12)].map((_, index) => (
+            <option key={index} value={index + 1}>
+              {new Date(0, index).toLocaleString("default", { month: "long" })}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      {filteredIncomes.length > 0 ? (
         <table className="min-w-full border border-gray-300 bg-white rounded-md shadow-lg">
           <thead className="bg-gray-100 text-gray-600 uppercase text-sm leading-normal">
             <tr>
@@ -53,7 +76,7 @@ const IncomeStats = () => {
             </tr>
           </thead>
           <tbody className="text-gray-700 text-sm font-light">
-            {incomes.map((income, index) => (
+            {filteredIncomes.map((income, index) => (
               <tr
                 key={index}
                 className="border-b border-gray-200 hover:bg-gray-50"
@@ -69,8 +92,9 @@ const IncomeStats = () => {
           </tbody>
         </table>
       ) : (
-        <p>No incomes available.</p>
+        <p>No incomes available for the selected month.</p>
       )}
+
       <div className="py-3 px-6 text-right font-bold">
         Total Incomes: ${totalIncomes.toFixed(2)}
       </div>
