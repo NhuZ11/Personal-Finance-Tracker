@@ -59,7 +59,7 @@ const ExpensesStats = () => {
                 className="border-b border-gray-200 hover:bg-gray-50"
               >
                 <td className="py-3 px-6 text-left whitespace-nowrap">
-                  {new Date(expense.createdAt).toLocaleDateString()}
+                  {new Date(expense.date).toLocaleDateString()}
                 </td>
                 <td className="py-3 px-6 text-left">{expense.category}</td>
                 <td className="py-3 px-6 text-left">{expense.description}</td>

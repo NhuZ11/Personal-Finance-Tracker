@@ -59,7 +59,7 @@ const SavingStats = () => {
                 className="border-b border-gray-200 hover:bg-gray-50"
               >
                 <td className="py-3 px-6 text-left whitespace-nowrap">
-                  {new Date(saving.createdAt).toLocaleDateString()}
+                  {new Date(saving.date).toLocaleDateString()}
                 </td>
                 <td className="py-3 px-6 text-left">{saving.category}</td>
                 <td className="py-3 px-6 text-left">{saving.description}</td>

@@ -10,7 +10,8 @@ const EventModal = ({ onClose, onSave, selectedDate, url }) => {
   const [description, setDescription] = useState("");
   const { categories, selectedCategory, setSelectedCategory } =
     useContext(CategoryContext);
-
+  
+    console.log(selectedDate)
   console.log(eventType);
   const eventSubmit = async (e) => {
     e.preventDefault();
