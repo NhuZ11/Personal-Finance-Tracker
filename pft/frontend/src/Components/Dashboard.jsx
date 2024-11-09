@@ -7,6 +7,7 @@ import SimpleCalendar from './SimpleCalendar';
 import axios from "axios";
 import CategoryContext from '../Context/CategoryContext';
 import Stats from './Stats';
+import Chart from './Chart';
 
 const Dashboard = () => {
   const [user, setUser] = useState([]);
@@ -47,6 +48,8 @@ const Dashboard = () => {
         return <Stats />;
       case "Profile":
         return <div><h2>User Profile</h2><p>Username: {user.username}</p></div>;
+      case "Chart":
+        return <Chart />;
       default:
         return <SimpleCalendar />;
     }
@@ -61,6 +64,7 @@ const Dashboard = () => {
         <button className='bg-green-200 p-2 m-2' onClick={() => setActiveSection("Dashboard")}>Dashboard</button>
         <button className='bg-green-200 p-2 m-2' onClick={() => setActiveSection("Stats")}>Stats</button>
         <button className='bg-green-200 p-2 m-2' onClick={() => setActiveSection("Profile")}>Profile</button>
+        <button className='bg-green-200 p-2 m-2' onClick={() => setActiveSection("Chart")}>Chart</button>
       </div>
 
       {/* Render the active section */}
