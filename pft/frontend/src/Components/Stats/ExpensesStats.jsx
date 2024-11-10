@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect , useContext} from "react";
 import Axios from "axios";
+import { StatsContext } from "../../Context/StatsContext";
 
 const ExpensesStats = () => {
   const [expenses, setExpenses] = useState([]);
   const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth() + 1); // Default to current month
+  const { setTotalExpenses } = useContext(StatsContext); // Access setTotalExpenses
 
   useEffect(() => {
     const fetchExpenses = async () => {
@@ -50,6 +52,12 @@ const ExpensesStats = () => {
     (total, expense) => total + expense.amount,
     0
   );
+
+  console.log(totalExpenses)
+
+  useEffect(() => {
+    setTotalExpenses(totalExpenses); // Update context with the new total
+  }, [totalExpenses, setTotalExpenses]);
 
   return (
     <div>

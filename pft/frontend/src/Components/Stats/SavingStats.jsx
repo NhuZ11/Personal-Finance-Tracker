@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect , useContext } from "react";
 import Axios from "axios";
+import { StatsContext } from "../../Context/StatsContext";
 
 const SavingStats = () => {
   const [savings, setSavings] = useState([]);
   const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth() + 1); // Default to current month
+  const { setTotalSavings } = useContext(StatsContext);
 
   useEffect(() => {
     const fetchSavings = async () => {
@@ -50,6 +52,11 @@ const SavingStats = () => {
     (total, saving) => total + saving.amount,
     0
   );
+
+  useEffect(() => {
+    setTotalSavings(totalSavings); // Update context with the new total
+  }, [totalSavings, setTotalSavings]);
+
 
   return (
     <div>

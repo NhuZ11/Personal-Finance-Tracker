@@ -1,16 +1,12 @@
-import React from 'react';
+// Chart.js
+import React, { useContext } from 'react';
 import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts';
-
-const data = [
-  { name: 'Expenses', value: 400 },
-  { name: 'Income', value: 300 },
-  { name: 'Saving', value: 300 },
-];
+import { StatsContext } from '../Context/StatsContext';
 
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
 const RADIAN = Math.PI / 180;
 
-const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent, index }) => {
+const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent, index }, data) => {
   if (percent > 0.05) {
     const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
     const x = cx + radius * Math.cos(-midAngle * RADIAN);
@@ -31,17 +27,27 @@ const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, per
   return null;
 };
 
-const Example = () => {
+const Chart = () => {
+  const { totalExpenses, totalIncomes, totalSavings } = useContext(StatsContext); // Access totalExpenses from context
+
+  console.log(totalExpenses)
+
+  const data = [
+    { name: 'Expenses', value: totalExpenses },
+    { name: 'Income', value: totalIncomes },
+    { name: 'Saving', value: totalSavings },
+  ];
+
   return (
-    <ResponsiveContainer width="100%" height={500}>  
-      <PieChart width={800} height={800}> 
+    <ResponsiveContainer width="100%" height={500}>
+      <PieChart width={800} height={800}>
         <Pie
           data={data}
           cx="50%"
           cy="50%"
           labelLine={false}
-          label={renderCustomizedLabel}
-          outerRadius={220}  
+          label={(props) => renderCustomizedLabel(props, data)}
+          outerRadius={220}
           fill="#8884d8"
           dataKey="value"
         >
@@ -54,4 +60,4 @@ const Example = () => {
   );
 };
 
-export default Example;
+export default Chart;
