@@ -2,10 +2,15 @@ import React, { useState, useEffect , useContext } from "react";
 import Axios from "axios";
 import { StatsContext } from "../../Context/StatsContext";
 
-const SavingStats = () => {
+const SavingStats = ({month}) => {
   const [savings, setSavings] = useState([]);
-  const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth() + 1); // Default to current month
+  const [selectedMonth, setSelectedMonth] = useState(month); // Default to current month
   const { setTotalSavings } = useContext(StatsContext);
+
+
+  useEffect(() => {
+    setSelectedMonth(month); // Sync selectedMonth with prop month
+  }, [month]);
 
   useEffect(() => {
     const fetchSavings = async () => {

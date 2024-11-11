@@ -16,6 +16,7 @@ import ExpensesStats from "./Components/Stats/ExpensesStats";
 import Chart from "./Components/Chart";
 import IncomeStats from "./Components/Stats/IncomeStats";
 import SavingStats from "./Components/Stats/SavingStats";
+import Stats from "./Components/Stats";
 
 function App() {
   const Context = createContext();
@@ -47,6 +48,8 @@ function App() {
                 ) : (
                   <Route path="/error" element={<Error />} />
                 )}
+
+                <Route path="/stats" element={<Stats />} />
 
                 <Route path="/expenses-stats" element={<ExpensesStats />} />
                 <Route path="/incomes-stats" element={<IncomeStats />} />
