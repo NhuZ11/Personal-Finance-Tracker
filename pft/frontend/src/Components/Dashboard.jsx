@@ -68,7 +68,7 @@ const Dashboard = () => {
       </div>
 
       {/* Render the active section */}
-      <h1 className='ms-[150px] text-xl font-bold'>Welcome, {user.username}</h1>
+      <h1 className='ms-[50px] text-xl font-bold'>Welcome, {user.username}</h1>
       {renderSection()}
     </div>
   );

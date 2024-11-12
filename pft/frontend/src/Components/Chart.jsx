@@ -1,40 +1,13 @@
 // Chart.js
 import React, { useContext } from "react";
-import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell } from "recharts";
 import { StatsContext } from "../Context/StatsContext";
+import ExpenseChart from "./CategoryChart/ExpenseChart";
 
-const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
-const RADIAN = Math.PI / 180;
-
-const renderCustomizedLabel = (
-  { cx, cy, midAngle, innerRadius, outerRadius, percent, index },
-  data
-) => {
-  if (percent > 0.05) {
-    const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
-    const x = cx + radius * Math.cos(-midAngle * RADIAN);
-    const y = cy + radius * Math.sin(-midAngle * RADIAN);
-
-    return (
-      <text
-        x={x}
-        y={y}
-        fill="white"
-        textAnchor={x > cx ? "start" : "end"}
-        dominantBaseline="central"
-      >
-        {`${data[index].name}: ${(percent * 100).toFixed(0)}%`}
-      </text>
-    );
-  }
-  return null;
-};
+const COLORS = ["#D22B2B", "#00C49F", "#FFBB28"];
 
 const Chart = () => {
-  const { totalExpenses, totalIncomes, totalSavings, selectedMonth } =
-    useContext(StatsContext); // Access totalExpenses from context
-
-  console.log(totalExpenses);
+  const { totalExpenses, totalIncomes, totalSavings, selectedMonth } = useContext(StatsContext);
 
   const data = [
     { name: "Expenses", value: totalExpenses },
@@ -44,39 +17,39 @@ const Chart = () => {
 
   return (
     <>
-      <div>
-        <p>
+      <div className="text-3xl font-semibold text-center underline">
+        <h1>Charts And Analysis</h1>
+      </div>
+      <div className="ms-[100px] mt-9">
+        <p className="text-2xl font-semibold">
           For the month of:{" "}
-          {new Date(0, selectedMonth - 1).toLocaleString("default", {
-            month: "long",
-          })}
+          {new Date(0, selectedMonth - 1).toLocaleString("default", { month: "long" })}
         </p>
 
-        <p>Your Expenses: {totalExpenses}</p>
-        <p>Your Income: {totalIncomes}</p>
-        <p>Your Saving: {totalSavings}</p>
+        <div className="flex space-x-11 items-center mx-5 my-3">
+        <p className="text-xl text-red-600">Your Expenses: ${totalExpenses}</p>
+        <p className="text-xl text-green-500">Your Income: ${totalIncomes}</p>
+        <p className="text-xl text-yellow-500"> Your Saving: ${totalSavings}</p>
+        </div>
       </div>
-      <ResponsiveContainer width="100%" height={500}>
-        <PieChart width={800} height={800}>
-          <Pie
-            data={data}
-            cx="50%"
-            cy="50%"
-            labelLine={false}
-            label={(props) => renderCustomizedLabel(props, data)}
-            outerRadius={220}
-            fill="#8884d8"
-            dataKey="value"
-          >
+      <div className="ms-[150px]">
+      <ResponsiveContainer width="40%" height={300}>
+        <BarChart data={data} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="name" />
+          <YAxis />
+          <Tooltip />
+          <Bar dataKey="value" fill="#8884d8">
             {data.map((entry, index) => (
-              <Cell
-                key={`cell-${index}`}
-                fill={COLORS[index % COLORS.length]}
-              />
+              <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
             ))}
-          </Pie>
-        </PieChart>
+          </Bar>
+        </BarChart>
       </ResponsiveContainer>
+      </div>
+      <div>
+        <ExpenseChart />
+      </div>
     </>
   );
 };
