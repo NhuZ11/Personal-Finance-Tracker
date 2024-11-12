@@ -3,6 +3,9 @@ import React, { useContext } from "react";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell } from "recharts";
 import { StatsContext } from "../Context/StatsContext";
 import ExpenseChart from "./CategoryChart/ExpenseChart";
+import IncomeChart from "./CategoryChart/IncomeChart";
+import SavingStats from "./Stats/SavingStats";
+import SavingsChart from "./CategoryChart/SavingChart";
 
 const COLORS = ["#D22B2B", "#00C49F", "#FFBB28"];
 
@@ -49,6 +52,8 @@ const Chart = () => {
       </div>
       <div>
         <ExpenseChart />
+        <IncomeChart />
+        <SavingsChart />
       </div>
     </>
   );

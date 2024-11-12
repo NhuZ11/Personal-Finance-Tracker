@@ -30,17 +30,17 @@ const renderCustomizedLabel = (
   return null;
 };
 
-const ExpenseChart = () => {
-  const [expenses, setExpenses] = useState([]);
+const SavingsChart = () => {
+  const [savings, setSavings] = useState([]);
   const { selectedMonth } = useContext(StatsContext);
 
   useEffect(() => {
-    const fetchExpenses = async () => {
+    const fetchSavings = async () => {
       const token = localStorage.getItem("token");
 
       try {
         const res = await Axios.get(
-          "http://localhost:8000/api/auth/get-expenses",
+          "http://localhost:8000/api/auth/get-savings",
           {
             headers: {
               "auth-token": token,
@@ -48,35 +48,35 @@ const ExpenseChart = () => {
           }
         );
 
-        if (res.data && res.data.data && res.data.data.expenses) {
-          setExpenses(res.data.data.expenses);
+        if (res.data && res.data.data && res.data.data.savings) {
+          setSavings(res.data.data.savings);
         } else {
           console.error("Unexpected response structure:", res.data);
         }
       } catch (error) {
         console.error(
-          "Error fetching expenses:",
+          "Error fetching savings:",
           error.response ? error.response.data : error.message
         );
       }
     };
 
-    fetchExpenses();
+    fetchSavings();
   }, []);
 
-  // Filter expenses for the selected month
-  const filteredExpenses = expenses.filter((expense) => {
-    const expenseDate = new Date(expense.date);
-    return expenseDate.getMonth() + 1 === selectedMonth;
+  // Filter savings for the selected month
+  const filteredSavings = savings.filter((saving) => {
+    const savingDate = new Date(saving.date);
+    return savingDate.getMonth() + 1 === selectedMonth;
   });
 
-  // Aggregate expenses by category
-  const categoryData = filteredExpenses.reduce((acc, expense) => {
-    const category = expense.category;
+  // Aggregate savings by category
+  const categoryData = filteredSavings.reduce((acc, saving) => {
+    const category = saving.category;
     if (!acc[category]) {
       acc[category] = 0;
     }
-    acc[category] += expense.amount;
+    acc[category] += saving.amount;
     return acc;
   }, {});
 
@@ -89,7 +89,7 @@ const ExpenseChart = () => {
   return (
     <>
       <div>
-        <h1 className="text-xl text-red-600">Expenses</h1>
+        <h1 className="text-xl text-blue-600">Savings</h1>
         <table>
           <thead>
             <tr>
@@ -99,13 +99,13 @@ const ExpenseChart = () => {
             </tr>
           </thead>
           <tbody>
-            {filteredExpenses.map((expense, index) => (
+            {filteredSavings.map((saving, index) => (
               <tr key={index} className="border-b border-gray-200 hover:bg-gray-50">
                 <td className="py-3 px-6 text-left whitespace-nowrap">
-                  {new Date(expense.date).toLocaleDateString()}
+                  {new Date(saving.date).toLocaleDateString()}
                 </td>
-                <td className="py-3 px-6 text-left">{expense.category}</td>
-                <td className="py-3 px-6 text-right">${expense.amount}</td>
+                <td className="py-3 px-6 text-left">{saving.category}</td>
+                <td className="py-3 px-6 text-right">${saving.amount}</td>
               </tr>
             ))}
           </tbody>
@@ -135,4 +135,4 @@ const ExpenseChart = () => {
   );
 };
 
-export default ExpenseChart;
+export default SavingsChart;

@@ -30,17 +30,17 @@ const renderCustomizedLabel = (
   return null;
 };
 
-const ExpenseChart = () => {
-  const [expenses, setExpenses] = useState([]);
+const IncomeChart = () => {
+  const [incomes, setIncomes] = useState([]);
   const { selectedMonth } = useContext(StatsContext);
 
   useEffect(() => {
-    const fetchExpenses = async () => {
+    const fetchIncomes = async () => {
       const token = localStorage.getItem("token");
 
       try {
         const res = await Axios.get(
-          "http://localhost:8000/api/auth/get-expenses",
+          "http://localhost:8000/api/auth/get-incomes",
           {
             headers: {
               "auth-token": token,
@@ -48,35 +48,35 @@ const ExpenseChart = () => {
           }
         );
 
-        if (res.data && res.data.data && res.data.data.expenses) {
-          setExpenses(res.data.data.expenses);
+        if (res.data && res.data.data && res.data.data.incomes) {
+          setIncomes(res.data.data.incomes);
         } else {
           console.error("Unexpected response structure:", res.data);
         }
       } catch (error) {
         console.error(
-          "Error fetching expenses:",
+          "Error fetching incomes:",
           error.response ? error.response.data : error.message
         );
       }
     };
 
-    fetchExpenses();
+    fetchIncomes();
   }, []);
 
-  // Filter expenses for the selected month
-  const filteredExpenses = expenses.filter((expense) => {
-    const expenseDate = new Date(expense.date);
-    return expenseDate.getMonth() + 1 === selectedMonth;
+  // Filter incomes for the selected month
+  const filteredIncomes = incomes.filter((income) => {
+    const incomeDate = new Date(income.date);
+    return incomeDate.getMonth() + 1 === selectedMonth;
   });
 
-  // Aggregate expenses by category
-  const categoryData = filteredExpenses.reduce((acc, expense) => {
-    const category = expense.category;
+  // Aggregate incomes by category
+  const categoryData = filteredIncomes.reduce((acc, income) => {
+    const category = income.category;
     if (!acc[category]) {
       acc[category] = 0;
     }
-    acc[category] += expense.amount;
+    acc[category] += income.amount;
     return acc;
   }, {});
 
@@ -89,7 +89,7 @@ const ExpenseChart = () => {
   return (
     <>
       <div>
-        <h1 className="text-xl text-red-600">Expenses</h1>
+        <h1 className="text-xl text-green-600">Incomes</h1>
         <table>
           <thead>
             <tr>
@@ -99,13 +99,13 @@ const ExpenseChart = () => {
             </tr>
           </thead>
           <tbody>
-            {filteredExpenses.map((expense, index) => (
+            {filteredIncomes.map((income, index) => (
               <tr key={index} className="border-b border-gray-200 hover:bg-gray-50">
                 <td className="py-3 px-6 text-left whitespace-nowrap">
-                  {new Date(expense.date).toLocaleDateString()}
+                  {new Date(income.date).toLocaleDateString()}
                 </td>
-                <td className="py-3 px-6 text-left">{expense.category}</td>
-                <td className="py-3 px-6 text-right">${expense.amount}</td>
+                <td className="py-3 px-6 text-left">{income.category}</td>
+                <td className="py-3 px-6 text-right">${income.amount}</td>
               </tr>
             ))}
           </tbody>
@@ -135,4 +135,4 @@ const ExpenseChart = () => {
   );
 };
 
-export default ExpenseChart;
+export default IncomeChart;
