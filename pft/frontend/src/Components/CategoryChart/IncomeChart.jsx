@@ -111,25 +111,27 @@ const IncomeChart = () => {
           </tbody>
         </table>
       </div>
-      <div>
-        <ResponsiveContainer width="100%" height={500}>
-          <PieChart>
-            <Pie
-              data={data}
-              cx="50%"
-              cy="50%"
-              labelLine={false}
-              label={(props) => renderCustomizedLabel(props, data)}
-              outerRadius={200}
-              fill="#8884d8"
-              dataKey="value"
-            >
-              {data.map((entry, index) => (
-                <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-              ))}
-            </Pie>
-          </PieChart>
-        </ResponsiveContainer>
+      <div className="flex items-start mt-8">
+        <div className="w-full max-w-xs">
+          <ResponsiveContainer width="150%" height={500}>
+            <PieChart>
+              <Pie
+                data={data}
+                cx="50%"
+                cy="50%"
+                labelLine={false}
+                label={(props) => renderCustomizedLabel(props, data)}
+                outerRadius={220}
+                fill="#8884d8"
+                dataKey="value"
+              >
+                {data.map((entry, index) => (
+                  <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                ))}
+              </Pie>
+            </PieChart>
+          </ResponsiveContainer>
+        </div>
       </div>
     </>
   );
