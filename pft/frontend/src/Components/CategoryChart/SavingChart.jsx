@@ -89,7 +89,7 @@ const SavingsChart = () => {
   return (
     <>
       <div>
-        <h1 className="text-xl text-blue-600">Savings</h1>
+        <h1 className="text-xl text-blue-600 ms-5">Savings</h1>
         <table>
           <thead>
             <tr>

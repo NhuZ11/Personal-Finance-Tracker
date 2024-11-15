@@ -17,6 +17,7 @@ import Chart from "./Components/Chart";
 import IncomeStats from "./Components/Stats/IncomeStats";
 import SavingStats from "./Components/Stats/SavingStats";
 import Stats from "./Components/Stats";
+import Contactus from "./Components/Contactus";
 
 function App() {
   const Context = createContext();
@@ -37,6 +38,7 @@ function App() {
                 <Route path="/about-us" element={<Aboutus />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
+                <Route path="/contact-us" element={<Contactus />} />
                 <Route path="/event" element={<EventModal />} />
                 {localStorage.getItem("token") ? (
                   <Route path="/admindashboard" element={<AdminDashboard />} />

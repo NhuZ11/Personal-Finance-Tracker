@@ -89,7 +89,7 @@ const ExpenseChart = () => {
   return (
     <>
        <div>
-        <h1 className="text-xl text-red-600">Expenses</h1>
+        <h1 className="text-xl text-red-600 ms-5">Expenses</h1>
         <table>
           <thead>
             <tr>

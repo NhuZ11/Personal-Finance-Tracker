@@ -34,14 +34,14 @@ const Header = () => {
             >
               About
             </Link>
-            <Link
+            {/* <Link
               to="/services"
               className="text-black hover:text-green-500 font-semibold"
             >
               Services
-            </Link>
+            </Link> */}
             <Link
-              to="/contact"
+              to="/contact-us"
               className="text-black hover:text-green-500 font-semibold"
             >
               Contact

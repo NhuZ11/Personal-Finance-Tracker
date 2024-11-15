@@ -89,7 +89,7 @@ const IncomeChart = () => {
   return (
     <>
       <div>
-        <h1 className="text-xl text-green-600">Incomes</h1>
+        <h1 className="text-xl text-green-600 ms-5">Incomes</h1>
         <table>
           <thead>
             <tr>
