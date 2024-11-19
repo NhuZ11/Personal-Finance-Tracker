@@ -25,29 +25,29 @@ const Footer = () => {
       </div>
       <div className="lg:col-span-2 flex justify-around mt-4">
         <div>
-          <h2 className="text-green-500 font-semibold text-xl">Front End</h2>
+          <h2 className="text-green-500 font-semibold text-xl">Expenses</h2>
           <ul>
-            <li>Angular</li>
-            <li>React</li>
-            <li>NextJs</li>
+            <li>Food</li>
+            <li>Social Life</li>
+            <li>Health</li>
           </ul>
         </div>
 
         <div>
-          <h2 className="text-green-500 font-semibold text-xl">Back End</h2>
+          <h2 className="text-green-500 font-semibold text-xl">Incomes</h2>
           <ul>
-            <li>Node</li>
-            <li>Express</li>
-            <li>NPM</li>
+            <li>Salary</li>
+            <li>Allowance</li>
+            <li>Bonus</li>
           </ul>
         </div>
 
         <div>
-          <h2 className="text-green-500 font-semibold text-xl">Database</h2>
+          <h2 className="text-green-500 font-semibold text-xl">Saving</h2>
           <ul>
-            <li>MongoDB</li>
-            <li>MySql</li>
-            <li>NoSQL</li>
+            <li>Stock</li>
+            <li>Gold</li>
+            <li>Investment</li>
           </ul>
         </div>
       </div>

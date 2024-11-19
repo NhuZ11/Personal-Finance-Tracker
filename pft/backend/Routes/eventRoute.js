@@ -4,6 +4,7 @@ const { body, validationResult } = require("express-validator");
 const Expenses = require("../Model/expenses.model");
 const Incomes = require("../Model/income.model")
 const Savings = require("../Model/saving.model")
+const Totals = require("../Model/monthlyTotal.model")
 const authenticateUser = require("../Middleware/authenticateUser");
 
 
@@ -171,6 +172,39 @@ router.get("/get-savings", authenticateUser, async (req, res) => {
 });
 
 
+//for total
+
+router.post(
+  "/add-totals",
+  authenticateUser,  // Middleware to authenticate the user
+  
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ status: "Failed", errors: errors.array() });
+    }
+
+    try {
+      // Create new expense with userId from req.user.id
+      const total = new Totals({
+        ...req.body,
+        userId: req.user.id, // Assign the authenticated user's ID to the expense
+      });
+
+      await total.save();
+
+      res.status(201).json({
+        status: "Success",
+        data: { total },
+      });
+    } catch (err) {
+      res.status(500).json({
+        status: "Failed",
+        message: err.message,
+      });
+    }
+  }
+);
 
 
 
