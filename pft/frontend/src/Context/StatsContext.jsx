@@ -1,5 +1,6 @@
 // ExpensesContext.js
-import React, { createContext, useState } from "react";
+import React, { createContext, useState, useEffect } from "react";
+import Axios from "axios";
 
 export const StatsContext = createContext();
 
@@ -28,6 +29,40 @@ export const StatsProvider = ({ children }) => {
     setTotalSavings(savings);
   };
 
+  // Automatically store totals to the backend when totals change
+  useEffect(() => {
+    const storeTotalsToBackend = async () => {
+      const token = localStorage.getItem("token");
+      try {
+        await Axios.post(
+          "http://localhost:8000/api/auth/add-totals",
+          {
+            totalExpenses,
+            totalIncomes,
+            totalSavings,
+            date: new Date(), // Include the current date
+          },
+          {
+            headers: {
+              "auth-token": token, // Send token in the header
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        console.log("Totals updated successfully in the backend.");
+      } catch (error) {
+        console.error(
+          "Error saving totals to backend:",
+          error.response ? error.response.data : error.message
+        );
+      }
+    };
+
+    if (totalExpenses || totalIncomes || totalSavings) {
+      storeTotalsToBackend(); // Trigger when totals are updated
+    }
+  }, [totalExpenses, totalIncomes, totalSavings]); // Dependency array to monitor changes
+
   return (
     <StatsContext.Provider
       value={{
@@ -41,7 +76,7 @@ export const StatsProvider = ({ children }) => {
         selectedMonth,
         setSelectedMonth,
         handleMonthChange,
-        filterByMonth
+        filterByMonth,
       }}
     >
       {children}

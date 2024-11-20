@@ -176,26 +176,51 @@ router.get("/get-savings", authenticateUser, async (req, res) => {
 
 router.post(
   "/add-totals",
-  authenticateUser,  // Middleware to authenticate the user
-  
+  authenticateUser, // Middleware to authenticate the user
   async (req, res) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(400).json({ status: "Failed", errors: errors.array() });
-    }
-
     try {
-      // Create new expense with userId from req.user.id
-      const total = new Totals({
-        ...req.body,
-        userId: req.user.id, // Assign the authenticated user's ID to the expense
+      // Extract data from the request body
+      const { totalExpenses, totalIncomes, totalSavings, date } = req.body;
+
+      // Find an existing record for the user on the given date
+      const existingTotal = await Totals.findOne({
+        userId: req.user.id,
+        date: {
+          $gte: new Date(date).setHours(0, 0, 0, 0), // Start of the day
+          $lte: new Date(date).setHours(23, 59, 59, 999), // End of the day
+        },
       });
 
-      await total.save();
+      if (existingTotal) {
+        // If a record exists, update it
+        existingTotal.totalExpenses = totalExpenses;
+        existingTotal.totalIncomes = totalIncomes;
+        existingTotal.totalSavings = totalSavings;
+
+        await existingTotal.save();
+
+        return res.status(200).json({
+          status: "Success",
+          message: "Totals updated successfully.",
+          data: existingTotal,
+        });
+      }
+
+      // If no record exists, create a new one
+      const newTotal = new Totals({
+        totalExpenses,
+        totalIncomes,
+        totalSavings,
+        date,
+        userId: req.user.id,
+      });
+
+      await newTotal.save();
 
       res.status(201).json({
         status: "Success",
-        data: { total },
+        message: "Totals added successfully.",
+        data: newTotal,
       });
     } catch (err) {
       res.status(500).json({
