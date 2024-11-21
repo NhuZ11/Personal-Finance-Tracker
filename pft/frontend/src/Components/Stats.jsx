@@ -3,7 +3,7 @@ import Axios from "axios";
 import ExpensesStats from "./Stats/ExpensesStats";
 import IncomeStats from "./Stats/IncomeStats";
 import SavingStats from "./Stats/SavingStats";
-import { StatsContext } from "\../Context/StatsContext";
+import { StatsContext } from "../Context/StatsContext";
 
 const Stats = () => {
   const [expenses, setExpenses] = useState([]);

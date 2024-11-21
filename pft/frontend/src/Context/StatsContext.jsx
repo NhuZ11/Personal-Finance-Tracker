@@ -40,7 +40,7 @@ export const StatsProvider = ({ children }) => {
             totalExpenses,
             totalIncomes,
             totalSavings,
-            date: new Date(), // Include the current date
+            date: new Date(new Date().setMonth(selectedMonth - 1)), // Include the current date
           },
           {
             headers: {
@@ -50,6 +50,8 @@ export const StatsProvider = ({ children }) => {
           }
         );
         console.log("Totals updated successfully in the backend.");
+        console.log("Date being sent to backend:", new Date(new Date().setMonth(selectedMonth - 1)));
+
       } catch (error) {
         console.error(
           "Error saving totals to backend:",

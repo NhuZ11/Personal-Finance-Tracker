@@ -18,7 +18,9 @@ const totalSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
     },
-    date: { type: Date },
+    date: { type: Date, required: true }
+    // month: { type: Number, required: true }, // Store month (1-12)
+    // year: { type: Number, required: true },  // Store year
   },
   { timestamps: true }
 );
