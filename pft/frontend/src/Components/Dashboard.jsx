@@ -8,6 +8,7 @@ import axios from "axios";
 import CategoryContext from '../Context/CategoryContext';
 import Stats from './Stats';
 import Chart from './Chart';
+import Comparison from './Comparison';
 
 const Dashboard = () => {
   const [user, setUser] = useState([]);
@@ -47,7 +48,7 @@ const Dashboard = () => {
       case "Stats":
         return <Stats />;
       case "Profile":
-        return <div><h2>User Profile</h2><p>Username: {user.username}</p></div>;
+        return <div><h2>User Profile</h2><p>Username: {user.username}</p> <Comparison /> </div>;
       case "Chart":
         return <Chart />;
       default:

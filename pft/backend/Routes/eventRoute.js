@@ -232,24 +232,37 @@ router.post(
 );
 
 
-router.get("/api/auth/get-totals", async (req, res) => {
-  const { month, year } = req.query;
+router.get("/get-totals", authenticateUser, async (req, res) => {
+
   const userId = req.user.id; // Assume user ID is extracted from the auth token
 
   try {
-    const totals = await Totals.findOne({ userId, month, year });
-    if (!totals) {
+
+
+ 
+   
+
+    // Find totals for the user within the specified date range
+    const totals = await Totals.find({
+      userId,
+      
+    }); 
+
+    if (totals.length === 0) {
       return res.status(404).json({
         totalExpenses: 0,
         totalIncomes: 0,
         totalSavings: 0,
-      }); // Return 0 if no data is found
+      });
     }
+
     res.json(totals);
   } catch (error) {
     res.status(500).json({ message: "Error retrieving totals.", error });
   }
 });
+
+
 
 
 

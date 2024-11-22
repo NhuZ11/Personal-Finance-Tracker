@@ -1,1 +1,42 @@
 made using usage of commonJS not es6
+
+
+
+
+
+
+To compare the changes in expenses, incomes, and savings across different months, the best approach is to calculate percentage changes or differences for each metric between months. Then, display the results in a table or use a graph to visualize trends more effectively.
+
+Approach
+Calculate Monthly Changes:
+
+For each month, compute the percentage or absolute change compared to the previous month:
+Absolute Change:
+Change
+=
+Current Month
+−
+Previous Month
+Change=Current Month−Previous Month
+Percentage Change:
+Percentage Change
+=
+(Current Month - Previous Month)
+Previous Month
+×
+100
+Percentage Change= 
+Previous Month
+(Current Month - Previous Month)
+​
+ ×100
+Format Data for Display:
+
+Create a table showing:
+Month-Year
+Current values for expenses, incomes, and savings
+Percentage changes compared to the previous month.
+Visualize Trends:
+
+Use a line chart to plot trends for expenses, incomes, and savings over time.
+Add arrows or color indicators (e.g., green for positive, red for negative changes) in the table for better interpretation.
