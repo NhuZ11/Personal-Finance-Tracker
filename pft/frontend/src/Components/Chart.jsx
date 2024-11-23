@@ -99,22 +99,22 @@ const Chart = () => {
           <span className="font-bold text-green-600"> Wants</span>, and{" "}
           <span className="font-bold text-purple-600">Saving</span>.
         </p>
-        <div className="w-full max-w-md bg-white p-6 rounded-lg shadow-md">
+        <div className="w-full max-w-lg bg-white p-6 rounded-lg shadow-md">
           <p className="text-lg font-semibold text-gray-700 mb-2">
             Your Total Income:{" "}
             <span className="text-blue-600 font-bold">{totalIncomes}</span>
           </p>
           <p className="text-lg text-gray-700 mb-2">
             <span className="font-bold text-blue-600">Needs:</span>{" "}
-            {(totalIncomes * 50) / 100}
+            {(totalIncomes * 50) / 100} [Household, Foods, Health, Education]
           </p>
           <p className="text-lg text-gray-700 mb-2">
             <span className="font-bold text-green-600">Wants:</span>{" "}
-            {(totalIncomes * 30) / 100}
+            {(totalIncomes * 30) / 100} [Entertainment, Social Life]
           </p>
           <p className="text-lg text-gray-700">
             <span className="font-bold text-purple-600">Saving:</span>{" "}
-            {(totalIncomes * 20) / 100}
+            {(totalIncomes * 20) / 100}  [Stocks, FD, Gold]
           </p>
         </div>
         <p className="text-lg text-gray-700">

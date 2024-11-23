@@ -48,7 +48,7 @@ const Dashboard = () => {
       case "Stats":
         return <Stats />;
       case "Profile":
-        return <div><h2>User Profile</h2><p>Username: {user.username}</p> <Comparison /> </div>;
+        return <div><p className='text-xl ms-[120px]'>Username: {user.username}</p> <Comparison /> </div>;
       case "Chart":
         return <Chart />;
       default:
@@ -69,7 +69,7 @@ const Dashboard = () => {
       </div>
 
       {/* Render the active section */}
-      <h1 className='ms-[50px] text-xl font-bold'>Welcome, {user.username}</h1>
+      <h1 className='text-center text-xl font-bold'>Welcome, {user.username}</h1>
       {renderSection()}
     </div>
   );
