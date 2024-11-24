@@ -96,7 +96,7 @@ const SimpleCalendar = () => {
       </div>
 
       {/* Days of the week */}
-      <div className="inline-flex space-x-28 items-start justify-start pr-24 h-full w-full">
+      <div className="inline-flex space-x-28 items-start justify-start pr-24 h-full w-full ms-[90px]">
         {["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"].map((day) => (
           <p key={day} className="w-12 h-full text-sm font-medium text-gray-800 uppercase">
             {day}
