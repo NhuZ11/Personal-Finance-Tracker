@@ -27,6 +27,7 @@ const Stats = () => {
       <ExpensesStats data={filterByMonth(expenses)} month={selectedMonth} />
       <IncomeStats data={filterByMonth(incomes)} month={selectedMonth}/>
       <SavingStats data={filterByMonth(savings)} month={selectedMonth}/>
+      <p></p>
     </div>
   );
 };
