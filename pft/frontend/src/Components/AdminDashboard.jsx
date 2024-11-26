@@ -10,15 +10,37 @@ const AdminDashboard = () => {
   const [selectedCategory, setSelectedCategory] = useState(null); // State for selected category
 
   useEffect(() => {
-    Axios.get("http://localhost:8000/api/auth/get-category").then((res) => {
-      setCategories(res.data.data.categories);
-    });
+    fetchCategories();
   }, []);
-  console.log(categories)
+
+  // Fetch categories from the server
+  const fetchCategories = async () => {
+    try {
+      const res = await Axios.get("http://localhost:8000/api/auth/get-category");
+      setCategories(res.data.data.categories);
+    } catch (err) {
+      console.error("Error fetching categories:", err);
+    }
+  };
+
+  // Delete category function
+  const deleteCategory = async (id) => {
+    if (window.confirm("Are you sure you want to delete this category?")) {
+      try {
+        await Axios.delete(`http://localhost:8000/api/auth/delete-category/${id}`);
+        setCategories(categories.filter((category) => category._id !== id));
+        alert("Category deleted successfully!");
+      } catch (err) {
+        console.error("Error deleting category:", err);
+        alert("Failed to delete category. Please try again.");
+      }
+    }
+  };
+
   return (
     <div>
       <h2>Admin Dashboard</h2>
-      
+
       <button
         className="bg-green-300 text-white px-4 py-2 rounded"
         onClick={() => setShowModal(true)}
@@ -53,7 +75,10 @@ const AdminDashboard = () => {
                         >
                           Update
                         </button>
-                        <button className="bg-red-500 text-white px-4 py-2 ">
+                        <button
+                          className="bg-red-500 text-white px-4 py-2"
+                          onClick={() => deleteCategory(val._id)}
+                        >
                           Delete
                         </button>
                       </td>
@@ -87,7 +112,10 @@ const AdminDashboard = () => {
                         >
                           Update
                         </button>
-                        <button className="bg-red-500 text-white px-4 py-2 ">
+                        <button
+                          className="bg-red-500 text-white px-4 py-2"
+                          onClick={() => deleteCategory(val._id)}
+                        >
                           Delete
                         </button>
                       </td>
@@ -121,7 +149,10 @@ const AdminDashboard = () => {
                         >
                           Update
                         </button>
-                        <button className="bg-red-500 text-white px-4 py-2 ">
+                        <button
+                          className="bg-red-500 text-white px-4 py-2"
+                          onClick={() => deleteCategory(val._id)}
+                        >
                           Delete
                         </button>
                       </td>

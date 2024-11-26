@@ -71,4 +71,24 @@ router.put('/update-category/:_id', async(req,res) =>{
 }
 })
 
+
+
+//delete category
+
+router.delete('/delete-category/:_id', async(req,res) => {
+  await Category.findByIdAndDelete(req.params._id)
+  
+  try{
+    res.status(204).json({
+        status : 'Success',
+        data : {}
+    })
+  }catch(err){
+      res.status(500).json({
+          status: 'Failed',
+          message : err
+      })
+  }
+})
+
 module.exports = router;
