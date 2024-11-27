@@ -91,4 +91,23 @@ router.delete('/delete-category/:_id', async(req,res) => {
   }
 })
 
+
+router.put('/update-type/:_id', async(req,res) =>{
+  const updatedType = await Category.findByIdAndUpdate(req.params._id, req.body,{
+    new: true,
+    runValidators: true
+  })
+  try{
+    res.status(200).json({
+        status : 'Success',
+        data : {
+          updatedType
+        }
+      })
+}catch(err){
+    console.log(err)
+}
+})
+
+
 module.exports = router;
