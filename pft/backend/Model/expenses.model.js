@@ -14,11 +14,11 @@ const expenseSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  type: {
-    type: String,
-    enum: ['Need', 'Want'],
-    required: true
-  },
+  // type: {
+  //   type: String,
+  //   enum: ['Need', 'Want'],
+  //   required: true
+  // },
   userId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",

@@ -1,25 +1,18 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const categorySchema = new mongoose.Schema({
-  name: {
+  name: { type: String, required: true },
+  category: { type: String, required: true },
+  description: { type: String, required: true },
+  type: {
     type: String,
-    required: true,  // Make it required if category name is essential
+    enum: ["Need", "Want"],
+    required: function () {
+      return this.category === "Expense"; // Make type required for Expense category
+    },
+    default: null, // Default value for non-expense categories
   },
-  category: {
-    type: String,
-    enum: ['Income', 'Expense', 'Saving'],  // Allows only "Income" or "Expense"
-    required: true,  // Ensure type is always provided
-  },
-  // belongsTo: {
-  //   type: mongoose.Schema.Types.ObjectId,
-  //   refPath: 'type',  // Dynamic reference based on the 'type' field
-  // },
-  description : {
-    type: String,
-    required: true
-  },
-}, { timestamps: true });
+});
 
 const Category = mongoose.model("Category", categorySchema);
-
 module.exports = Category;

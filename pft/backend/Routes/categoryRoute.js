@@ -7,10 +7,20 @@ const { body, validationResult } = require("express-validator");
 //add category
 router.post(
   '/add-category',
-  // Validate that 'name' field exists in request body
-  body("name").notEmpty().withMessage("Category name is required"),
+  [
+    body("name").notEmpty().withMessage("Category name is required"),
+    body("category").notEmpty().withMessage("Category type is required"),
+    body("description").notEmpty().withMessage("Description is required"),
+    body("type")
+      .custom((value, { req }) => {
+        if (req.body.category === "Expense" && !value) {
+          throw new Error("Type is required for Expense category");
+        }
+        return true;
+      })
+      .optional(),
+  ],
   async (req, res) => {
-    // Find validation errors
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ status: "Failed", errors: errors.array() });
@@ -21,12 +31,12 @@ router.post(
       await category.save();
       res.status(201).json({
         status: 'Success',
-        data: { category }
+        data: { category },
       });
     } catch (err) {
       res.status(500).json({
         status: 'Failed',
-        message: err.message  // Send only the error message
+        message: err.message,
       });
     }
   }
