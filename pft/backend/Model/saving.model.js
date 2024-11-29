@@ -5,6 +5,7 @@ const savingSchema = new mongoose.Schema(
         amount: {
           type: Number,
           default: 0,
+          min: [0, "Cannot enter negative value"]
         },
         category: {
           type: String,

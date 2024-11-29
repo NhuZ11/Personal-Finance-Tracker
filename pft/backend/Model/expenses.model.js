@@ -4,7 +4,8 @@ const expenseSchema = new mongoose.Schema({
    amount:{
     type: Number,
     default: 0,
-    required: true
+    required: true,
+    min: [0, "Cannot enter negative value"]
    },
    category: {
     type: String,
