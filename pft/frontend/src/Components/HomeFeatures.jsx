@@ -1,6 +1,9 @@
 import React from "react";
 import Image from "../assets/logo.png";
 import Car from '../assets/Automotive.png'
+import Daily from '../assets/pft1.png'
+import Budget from '../assets/pft2.png'
+import Algo from '../assets/pft3.png'
 
 const HomeFeatures = () => {
   return (
@@ -10,7 +13,7 @@ const HomeFeatures = () => {
       </div>
       <section className="w-full mt-10">
         <div className="max-w-[1000px] mx-auto flex flex-col md:flex-row items-center gap-10">
-          <img src={Image} alt="Feature Image" className="w-[300px] h-[300px]" />
+          <img src={Daily} alt="Feature Image" className="w-[300px] h-[300px]" />
           <article className="md:w-1/2 p-4 text-justify">
             <h2 className="text-green-500 text-4xl font-bold py-4">
               Track Your <br />
@@ -29,7 +32,7 @@ const HomeFeatures = () => {
       {/* Another feature */}
       <section className="w-full mt-20">
         <div className="max-w-[1000px] mx-auto flex flex-col md:flex-row-reverse items-center gap-10">
-          <img src={Image} alt="Feature Image" className="w-[300px] h-[300px]" />
+          <img src={Budget} alt="Feature Image" className="w-[300px] h-[300px]" />
           <article className="md:w-1/2 p-4 text-justify md:text-right">
             <h2 className="text-green-500 text-4xl font-bold py-4">
               Budgeting <br />
@@ -47,7 +50,7 @@ const HomeFeatures = () => {
       {/* //another feature */}
       <section className="w-full mt-10">
         <div className="max-w-[1000px] mx-auto flex flex-col md:flex-row items-center gap-10">
-          <img src={Image} alt="Feature Image" className="w-[300px] h-[300px]" />
+          <img src={Algo} alt="Feature Image" className="w-[300px] h-[300px]" />
           <article className="md:w-1/2 p-4 text-justify">
             <h2 className="text-green-500 text-4xl font-bold py-4">
               50/30/20 <br />
