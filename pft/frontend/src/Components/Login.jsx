@@ -51,11 +51,7 @@ const Login = (props) => {
     >
       <div className="w-full max-w-sm bg-white rounded-lg shadow-md p-6 mt-10">
         <div className="flex items-center mb-6 text-gray-900">
-          <img
-            className="w-8 h-8 mr-2"
-            src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg"
-            alt="logo"
-          />
+       
           <span className="text-xl font-semibold">Personal Finance Tracker</span>
         </div>
         <h1 className="text-2xl font-bold mb-4">Sign in to your account</h1>
@@ -104,20 +100,8 @@ const Login = (props) => {
             />
           </div>
           <div className="flex items-center justify-between">
-            <div className="flex items-center">
-              <input
-                id="remember"
-                type="checkbox"
-                className="w-4 h-4 border border-gray-300 rounded bg-gray-50"
-                required
-              />
-              <label htmlFor="remember" className="ml-2 text-sm text-gray-500">
-                Remember me
-              </label>
-            </div>
-            <Link className="text-sm text-green-600 hover:underline">
-              Forgot password?
-            </Link>
+           
+           
           </div>
           <button
             type="submit"

@@ -58,11 +58,7 @@ const Register = () => {
     >
       <div className="w-full max-w-sm bg-white rounded-lg shadow-md p-6 mt-10">
         <div className="flex items-center mb-6 text-gray-900">
-          <img
-            className="w-8 h-8 mr-2"
-            src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg"
-            alt="logo"
-          />
+     
           <span className="text-xl font-semibold">
             Personal Finance Tracker
           </span>
@@ -142,18 +138,7 @@ const Register = () => {
             />
           </div>
           <div className="flex items-center">
-            <input
-              id="terms"
-              type="checkbox"
-              className="w-4 h-4 border border-gray-300 rounded bg-gray-50"
-              required
-            />
-            <label htmlFor="terms" className="ml-2 text-sm text-gray-500">
-              I accept the{" "}
-              <Link to="/terms" className="text-green-600 hover:underline">
-                Terms and Conditions
-              </Link>
-            </label>
+           
           </div>
           <button
             type="submit"
